@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">叮当无忧</string>
+
+    <string name="request_fail">网络超时，请稍候</string>
+</resources>

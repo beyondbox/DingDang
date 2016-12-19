@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:padding="10dp"
+                android:descendantFocusability="blocksDescendants"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <com.zlkj.dingdangwuyou.widget.BorderCircleImageView
+        android:id="@+id/imgViAvatar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/touxiang"/>
+
+    <ImageView
+        android:id="@+id/imgViChoose"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginLeft="30dp"
+        android:src="@mipmap/uncheck"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"/>
+
+    <RelativeLayout
+        android:id="@+id/rLaytData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/imgViChoose"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:id="@+id/data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="接令时间"
+            android:textColor="@color/gray"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/data"
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"
+            android:text="2016-12-09"
+            android:textColor="@color/gray"
+            android:textSize="13sp"/>
+
+    </RelativeLayout>
+
+
+
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/imgViAvatar"
+        android:layout_toLeftOf="@id/rLaytData"
+        android:layout_marginRight="10dp">
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="刘艺广"
+            android:textColor="@color/homeTabNormal"
+            android:textSize="15sp"/>
+
+
+        <TextView
+            android:id="@+id/txtSex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtName"
+            android:layout_alignLeft="@id/txtName"
+            android:layout_marginTop="3dp"
+            android:text="男"
+            android:textColor="@color/blackLight"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/txtArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtName"
+            android:layout_toRightOf="@id/txtSex"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="3dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="石家庄"
+            android:textColor="@color/blackLight"
+            android:textSize="13sp"/>
+
+        <LinearLayout
+            android:id="@+id/lLaytPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_below="@id/txtSex"
+            android:layout_marginTop="3dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="电话: "
+                android:textColor="@color/homeSection"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:id="@+id/txtPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text=""
+                android:textColor="@color/homeSection"
+                android:textSize="13sp"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

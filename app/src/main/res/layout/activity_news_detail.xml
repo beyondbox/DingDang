@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <include layout="@layout/common_title_bar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtHeadline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:lineSpacingExtra="3dp"
+                android:text="国庆长假5天中国旅游消费超4千亿"
+                android:textSize="18sp"
+                android:textColor="@color/homeTabNormal"/>
+
+            <TextView
+                android:id="@+id/txtTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center_horizontal"
+                android:text="2016-11-07"
+                android:textColor="@color/gray"
+                android:textSize="13sp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/homeSection"/>
+
+
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@mipmap/news_detail"/>
+
+            <TextView
+                android:id="@+id/txtContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:lineSpacingExtra="7dp"
+                android:textColor="#666666"
+                android:textSize="15sp"
+                android:text="       中国国庆假期进入第五日，民众出游热情不减，全国旅游市场继续保持高位运行。据国家旅游局数据中心综合测算，10月5日中国旅游接待人数达0.83亿人次，同比增长10.7%；旅游消费665亿元（人民币，下同），同比增幅13.3%。1日至5日，国庆假期旅游消费已超过4000亿元，达到4062.5亿元，旅游接待人数接近5亿人次。"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

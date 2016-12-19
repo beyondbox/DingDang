@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@android:color/white"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include layout="@layout/common_title_bar_location"/>
+
+    <RadioGroup
+        android:id="@+id/rdoGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+        <com.zlkj.dingdangwuyou.widget.MDMRadioButton
+            android:id="@+id/rdoBtnFullTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:text="全职"
+            android:textSize="15sp"
+            android:drawableLeft="@mipmap/quanzhi"
+            android:drawablePadding="2dp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/slt_hire_type_bg"/>
+
+        <com.zlkj.dingdangwuyou.widget.MDMRadioButton
+            android:id="@+id/rdoBtnPartTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:text="兼职"
+            android:textSize="15sp"
+            android:drawableLeft="@mipmap/jianzhi"
+            android:drawablePadding="2dp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/slt_hire_type_bg"/>
+    </RadioGroup>
+
+
+
+    <com.chanven.lib.cptr.PtrClassicFrameLayout
+        android:id="@+id/ptrLaytHire"
+        xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <!--历史信息-->
+                <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="17dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="10dp">
+
+                        <TextView
+                            android:id="@+id/txtHistoryName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="历史招募信息"
+                            android:textSize="15sp"
+                            android:textColor="@color/homeSection"/>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="1"/>
+
+                        <TextView
+                            android:id="@+id/txtShowAllHistory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingTop="4dp"
+                            android:paddingBottom="4dp"
+                            android:text="显示全部"
+                            android:textSize="11sp"
+                            android:textColor="@android:color/white"
+                            android:background="@drawable/slt_show_all_bg"/>
+                    </LinearLayout>
+                    
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.8dp"
+                        android:background="@color/titleBarRed"
+                        android:layout_marginTop="3dp"/>
+
+                    <com.zlkj.dingdangwuyou.widget.NoScrollListView
+                        android:id="@+id/lvHistory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+
+
+                <!--最新信息-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="10dp">
+
+                        <TextView
+                            android:id="@+id/txtLatestName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="最新自荐信息"
+                            android:textSize="15sp"
+                            android:textColor="@color/homeSection"/>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="1"/>
+
+                        <TextView
+                            android:id="@+id/txtShowAllLatest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingTop="4dp"
+                            android:paddingBottom="4dp"
+                            android:text="显示全部"
+                            android:textSize="11sp"
+                            android:textColor="@android:color/white"
+                            android:background="@drawable/slt_show_all_bg"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.8dp"
+                        android:background="@color/titleBarRed"
+                        android:layout_marginTop="3dp"/>
+
+                    <com.zlkj.dingdangwuyou.widget.NoScrollListView
+                        android:id="@+id/lvLatest"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10dp"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+    </com.chanven.lib.cptr.PtrClassicFrameLayout>
+
+</LinearLayout>

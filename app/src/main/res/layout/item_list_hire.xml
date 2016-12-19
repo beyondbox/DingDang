@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:padding="10dp">
+
+    <com.zlkj.dingdangwuyou.widget.BorderCircleImageView
+        android:id="@+id/imgViAvatar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/hire_avatar"/>
+
+    <RelativeLayout
+        android:id="@+id/rLaytWage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:text="10-31"
+            android:textColor="#A6A6A6"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/txtWage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtDate"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="2dp"
+            android:text="面议"
+            android:textColor="#E2443E"
+            android:textSize="13sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/imgViAvatar"
+        android:layout_toLeftOf="@id/rLaytWage"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <TextView
+            android:id="@+id/txtHireType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全职"
+            android:textColor="@color/green"
+            android:textSize="13sp"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@id/txtPosition"
+            android:layout_marginRight="20dp"/>
+
+        <TextView
+            android:id="@+id/txtPosition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/txtHireType"
+            android:layout_marginRight="10dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="网站编辑"
+            android:textColor="@color/homeTabNormal"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtPosition"
+            android:layout_marginTop="2dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="韩龙飞"
+            android:textSize="14sp"
+            android:textColor="@color/blackLight"/>
+
+        <TextView
+            android:id="@+id/txtLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtName"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:drawableLeft="@mipmap/didian_green"
+            android:drawablePadding="1dp"
+            android:text="石家庄"
+            android:textColor="@color/green"
+            android:textSize="11sp"/>
+
+        <TextView
+            android:id="@+id/txtEducation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/txtLocation"
+            android:layout_alignBottom="@id/txtLocation"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:drawableLeft="@mipmap/education"
+            android:drawablePadding="3dp"
+            android:text="本科"
+            android:textColor="@color/green"
+            android:textSize="11sp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

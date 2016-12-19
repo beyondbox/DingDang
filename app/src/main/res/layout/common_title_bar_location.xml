@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="@color/titleBarRed">
+
+    <ImageView
+        android:id="@+id/imgViBack"
+        android:layout_width="44dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/slt_titlebar_menu_bg"
+        android:src="@mipmap/fanhui"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="招贤纳士"
+            android:textColor="@android:color/white"
+            android:textSize="17sp"/>
+
+        <TextView
+            android:id="@+id/txtDivider"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/txtTitle"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:gravity="center"
+            android:text="-"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/txtLocated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/txtDivider"
+            android:layout_alignBottom="@id/txtTitle"
+            android:gravity="center"
+            android:text="石家庄"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"/>
+
+        <ImageView
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:src="@mipmap/xia"
+            android:layout_toRightOf="@id/txtLocated"
+            android:layout_marginLeft="2dp"
+            android:layout_alignBottom="@id/txtLocated"
+            android:layout_marginBottom="4dp"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txtRight"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/slt_titlebar_menu_bg"
+        android:layout_alignParentRight="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center"
+        android:text="发布职位"
+        android:textColor="@android:color/white"
+        android:textSize="13sp"/>
+
+</RelativeLayout>
