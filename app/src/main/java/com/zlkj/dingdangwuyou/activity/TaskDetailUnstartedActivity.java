@@ -3,6 +3,7 @@ package com.zlkj.dingdangwuyou.activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,9 +57,12 @@ public class TaskDetailUnstartedActivity extends BaseActivity {
     EditText txtPhone;
     @BindView(R.id.txtMessage)
     EditText txtMessage;
+    @BindView(R.id.lLaytBottomBar)
+    LinearLayout lLaytBottomBar;
 
     private Task task;
     private ApplyTaskDialog applyDialog;
+    private boolean needMenu;
 
     @Override
     protected int getContentViewId() {
@@ -71,6 +75,12 @@ public class TaskDetailUnstartedActivity extends BaseActivity {
         applyDialog = new ApplyTaskDialog(context);
 
         task = (Task) getIntent().getSerializableExtra(Const.KEY_OBJECT);
+        needMenu = getIntent().getBooleanExtra(Const.KEY_NEED_MENU, false);
+
+        if (needMenu) {
+            lLaytBottomBar.setVisibility(View.VISIBLE);
+        }
+
         setData();
     }
 

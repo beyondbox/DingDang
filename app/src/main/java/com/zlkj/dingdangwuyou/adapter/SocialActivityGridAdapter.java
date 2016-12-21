@@ -28,7 +28,7 @@ public class SocialActivityGridAdapter extends MyBaseAdapter<SocialActivity> {
 
     private int columnWidth; //列的宽度
 
-    public SocialActivityGridAdapter(Context context, List list) {
+    public SocialActivityGridAdapter(Context context, List<SocialActivity> list) {
         super(context, list);
     }
 

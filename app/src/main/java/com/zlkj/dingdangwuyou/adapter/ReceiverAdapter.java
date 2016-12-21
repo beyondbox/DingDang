@@ -27,7 +27,7 @@ import butterknife.ButterKnife;
 public class ReceiverAdapter extends MyBaseAdapter<Receiver> {
     public static final int TAG_CHOOSE_RECEIVER = 2000;
 
-    public ReceiverAdapter(Context context, List list) {
+    public ReceiverAdapter(Context context, List<Receiver> list) {
         super(context, list);
     }
 

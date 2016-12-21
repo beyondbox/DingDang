@@ -16,7 +16,7 @@ import java.util.List;
  */
 
 public class PopMenuStringAdapter extends MyBaseAdapter<String> {
-    public PopMenuStringAdapter(Context context, List list) {
+    public PopMenuStringAdapter(Context context, List<String> list) {
         super(context, list);
     }
 

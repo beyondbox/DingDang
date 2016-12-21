@@ -6,17 +6,20 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.GridView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.zlkj.dingdangwuyou.R;
+import com.zlkj.dingdangwuyou.adapter.TaskImageAdapter;
 import com.zlkj.dingdangwuyou.base.BaseActivity;
 import com.zlkj.dingdangwuyou.entity.ReceivedTask;
 import com.zlkj.dingdangwuyou.entity.Receiver;
@@ -26,13 +29,19 @@ import com.zlkj.dingdangwuyou.net.MyHttpClient;
 import com.zlkj.dingdangwuyou.net.Url;
 import com.zlkj.dingdangwuyou.utils.AppTool;
 import com.zlkj.dingdangwuyou.utils.Const;
+import com.zlkj.dingdangwuyou.utils.GsonUtil;
 import com.zlkj.dingdangwuyou.utils.ImageUtil;
 import com.zlkj.dingdangwuyou.utils.UserUtil;
 
 import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -47,6 +56,8 @@ public class TaskDetailReceivedUnderwayActivity extends BaseActivity {
     @BindView(R.id.txtTitle)
     TextView txtTitle;
 
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
     @BindView(R.id.txtType)
     TextView txtType;
     @BindView(R.id.txtName)
@@ -69,20 +80,23 @@ public class TaskDetailReceivedUnderwayActivity extends BaseActivity {
     EditText txtPhone;
     @BindView(R.id.txtMessage)
     EditText txtMessage;
-    @BindView(R.id.imageView)
-    ImageView imageView;
-
+    @BindView(R.id.txtImgSection)
+    TextView txtImgSection;
+    @BindView(R.id.gridViImg)
+    GridView gridViImg;
     @BindView(R.id.txtHandle)
     TextView txtHandle;
-    @BindView(R.id.txtReceiver)
-    TextView txtReceiver;
 
     private Receiver receiver;
     private Task task;
 
     private File cameraFile; //拍照文件
     private File uploadFile; //最终上传的图片文件
-    private int uploadSize = 800; //上传图片大小限制，单位KB
+    private int uploadSize = 500; //上传图片大小限制，单位KB
+    private List<File> uploadList; //上传图片的集合(便于退出时清空压缩后的图片)
+
+    private List<String> imgList;
+    private TaskImageAdapter imgAdapter;
 
     @Override
     protected int getContentViewId() {
@@ -97,7 +111,16 @@ public class TaskDetailReceivedUnderwayActivity extends BaseActivity {
         receiver = receivedTask.getReceiver();
         task = receivedTask.getTask();
 
+        setList();
         setData();
+    }
+
+    private void setList() {
+        imgList = new ArrayList<String>();
+        imgAdapter = new TaskImageAdapter(context, imgList);
+        gridViImg.setAdapter(imgAdapter);
+
+        uploadList = new ArrayList<File>();
     }
 
 
@@ -117,13 +140,12 @@ public class TaskDetailReceivedUnderwayActivity extends BaseActivity {
         txtPhone.setText(task.getT_contact());
         txtMessage.setText(task.getT_words());
 
-        /*if (!TextUtils.isEmpty(task.getPicture())) {
-            Glide.with(context)
-                    .load(Url.HOST + task.getPicture())
-                    .placeholder(R.mipmap.image_loading)
-                    .error(R.mipmap.image_error)
-                    .into(imageView);
-        }*/
+        if (!TextUtils.isEmpty(task.getPicture())) {
+            String[] data = task.getPicture().split(",");
+            imgList.clear();
+            imgList.addAll(Arrays.asList(data));
+            imgAdapter.notifyDataSetChanged();
+        }
     }
 
 
@@ -173,6 +195,54 @@ public class TaskDetailReceivedUnderwayActivity extends BaseActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 Toast.makeText(context, "上传成功", Toast.LENGTH_SHORT).show();
+                setResult(Const.RESULT_CODE_SAVE_SUCCEED);
+                refreshTaskInfo();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(context, getResources().getString(R.string.request_fail), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
+                pDialog.dismiss();
+            }
+        });
+    }
+
+    /**
+     * 刷新任务信息
+     */
+    private void refreshTaskInfo() {
+        RequestParams params = new RequestParams();
+        params.put("id", task.getId());
+        MyHttpClient.getInstance().post(Url.URL_TASK_SELECT, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onStart() {
+                super.onStart();
+                pDialog.setMessage("正在刷新任务信息，请稍候....");
+                pDialog.show();
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String jsonStr = new String(responseBody);
+                try {
+                    JSONArray jsonArr = new JSONArray(jsonStr);
+                    task = GsonUtil.getEntity(jsonArr.getJSONObject(0).toString(), Task.class);
+                    setData();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrollView.smoothScrollTo(0, txtImgSection.getTop());
+                        }
+                    }, 300);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -261,6 +331,7 @@ public class TaskDetailReceivedUnderwayActivity extends BaseActivity {
         if (requestCode == Const.REQUEST_CODE_CAMERA) { //拍照
             if (cameraFile.exists()) {
                 if (compressAndSave(cameraFile.getPath())) {
+                    uploadList.add(uploadFile);
                     upload();
                 }
             }
@@ -271,6 +342,7 @@ public class TaskDetailReceivedUnderwayActivity extends BaseActivity {
                 String imgPath = ImageUtil.getImageAbsolutePath(this, imgUri);
                 if (!TextUtils.isEmpty(imgPath) && new File(imgPath).exists()) {
                     if (compressAndSave(imgPath)) {
+                        uploadList.add(uploadFile);
                         upload();
                     }
                 }
@@ -286,9 +358,7 @@ public class TaskDetailReceivedUnderwayActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.txtHandle: //上传图片
-                if (TextUtils.isEmpty(task.getPicture())) {
-                    showUploadOption();
-                }
+                showUploadOption();
                 break;
             default:
                 break;
@@ -299,8 +369,11 @@ public class TaskDetailReceivedUnderwayActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (uploadFile != null && uploadFile.exists()) {
-            uploadFile.delete();
+        //清空压缩后的图片
+        for (File file : uploadList) {
+            if (file != null && file.exists()) {
+                file.delete();
+            }
         }
     }
 }

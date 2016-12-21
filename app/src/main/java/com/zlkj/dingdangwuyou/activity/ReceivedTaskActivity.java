@@ -206,14 +206,14 @@ public class ReceivedTaskActivity extends BaseActivity {
         Intent intent = null;
         switch (rdoGroup.getCheckedRadioButtonId()) {
             case R.id.rdoBtnFresh:
-                /*intent = new Intent(context, TaskDetailUnstartedActivity.class);
-                intent.putExtra(Const.KEY_OBJECT, freshList.get(position));
-                startActivityForResult(intent, 0);*/
+                intent = new Intent(context, TaskDetailUnstartedActivity.class);
+                intent.putExtra(Const.KEY_OBJECT, freshList.get(position).getTask());
+                startActivity(intent);
                 break;
             case R.id.rdoBtnUnderway:
                 intent = new Intent(context, TaskDetailReceivedUnderwayActivity.class);
                 intent.putExtra(Const.KEY_OBJECT, underwayList.get(position));
-                startActivity(intent);
+                startActivityForResult(intent, 0);
                 break;
             case R.id.rdoBtnFinished:
                 /*intent = new Intent(context, TaskDetailPublishedUnderwayActivity.class);
@@ -225,4 +225,12 @@ public class ReceivedTaskActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Const.RESULT_CODE_SAVE_SUCCEED) {
+            pDialog.show();
+            getData();
+        }
+    }
 }

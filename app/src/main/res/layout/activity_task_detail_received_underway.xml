@@ -8,6 +8,7 @@
     <include layout="@layout/common_title_bar"/>
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -455,11 +456,11 @@
 
 
             <TextView
+                android:id="@+id/txtImgSection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/TaskSection"
                 android:padding="15dp"
-                android:layout_marginBottom="80dp"
                 android:text="回传图片"
                 android:textSize="15sp"
                 android:textColor="@color/TaskSectionText"/>

@@ -164,8 +164,6 @@ public class MyCenterFragment extends BaseFragment {
         Glide.with(context)
                 .load(imgUrl)
                 .dontAnimate()
-                .placeholder(R.mipmap.touxiang)
-                .error(R.mipmap.touxiang)
                 .into(imgViAvatar);
 
         //有姓名则显示，没有则显示帐号名

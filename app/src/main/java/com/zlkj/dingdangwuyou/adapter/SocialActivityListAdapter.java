@@ -27,7 +27,7 @@ import butterknife.ButterKnife;
 
 public class SocialActivityListAdapter extends MyBaseAdapter<SocialActivity> {
 
-    public SocialActivityListAdapter(Context context, List list) {
+    public SocialActivityListAdapter(Context context, List<SocialActivity> list) {
         super(context, list);
     }
 

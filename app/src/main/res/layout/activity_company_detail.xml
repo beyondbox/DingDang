@@ -266,6 +266,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:gravity="center_horizontal"
                         android:text="营业执照"
                         android:textColor="#C3C3C3"/>
 
@@ -292,6 +293,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:gravity="center_horizontal"
                         android:text="法人近期照"
                         android:textColor="#C3C3C3"/>
 
@@ -318,6 +320,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:gravity="center_horizontal"
                         android:text="法人身份证扫描件"
                         android:textColor="#C3C3C3"/>
 

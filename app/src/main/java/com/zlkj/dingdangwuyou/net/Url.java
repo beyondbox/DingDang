@@ -115,6 +115,10 @@ public class Url {
      * 猎金-确认上传
      */
     public static final String URL_TASK_UPLOAD = HOST + "/moneypenny/jieling!queren.action";
+    /**
+     * 猎金-任务完成中查询
+     */
+    public static final String URL_TASK_SELECT = HOST + "/moneypenny/reward!taskById.action";
 
 
 

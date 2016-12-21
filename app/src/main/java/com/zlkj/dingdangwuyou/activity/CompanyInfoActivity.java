@@ -3,6 +3,7 @@ package com.zlkj.dingdangwuyou.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -33,6 +34,8 @@ import org.json.JSONException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -72,13 +75,18 @@ public class CompanyInfoActivity extends BaseActivity {
 
     private String id = ""; //企业用户id
 
-    private File avatarFile; // 拍照保存文件(调用相机拍照时)
+    private File cameraFile; // 拍照保存文件(调用相机拍照时)
 
     private int choosePosition; //当前点击更改图片的位置， 1营业执照、2法人近期照、3法人身份证
 
-    private String licensePath = ""; //选择的营业执照图片的路径
-    private String legalPersonPath = ""; //选择的法人近期照图片的路径
-    private String legalPersonIDPath = ""; //选择的法人身份证图片的路径
+    private int uploadSize = 500; //上传图片大小限制（单张），单位KB
+
+    private File licenseFile; //选择的营业执照图片（压缩后）
+    private File legalPersonFile; //选择的法人近期照图片（压缩后）
+    private File legalPersonIDFile; //选择的法人身份证图片（压缩后）
+
+    private List<File> uploadList; //上传图片的集合(便于退出时清空压缩后的图片)
+
 
     @Override
     protected int getContentViewId() {
@@ -90,6 +98,8 @@ public class CompanyInfoActivity extends BaseActivity {
         txtTitle.setText("企业信息");
         txtRight.setText("保存更改");
         txtRight.setVisibility(View.VISIBLE);
+
+        uploadList = new ArrayList<File>();
 
         id = UserUtil.getUserInfo().getId();
         getCompanyInfo();
@@ -174,23 +184,23 @@ public class CompanyInfoActivity extends BaseActivity {
         params.put("industry", txtIndustry.getText().toString().trim());
         params.put("cpcontent", txtIntro.getText().toString().trim());
 
-        if (!TextUtils.isEmpty(licensePath)) {
+        if (licenseFile != null && licenseFile.exists()) {
             try {
-                params.put("file1", new File(licensePath));
+                params.put("file1", licenseFile);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
-        if (!TextUtils.isEmpty(legalPersonPath)) {
+        if (legalPersonFile != null && legalPersonFile.exists()) {
             try {
-                params.put("file2", new File(legalPersonPath));
+                params.put("file2", legalPersonFile);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
-        if (!TextUtils.isEmpty(legalPersonIDPath)) {
+        if (legalPersonIDFile != null && legalPersonIDFile.exists()) {
             try {
-                params.put("file3", new File(legalPersonIDPath));
+                params.put("file3", legalPersonIDFile);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -287,10 +297,10 @@ public class CompanyInfoActivity extends BaseActivity {
                                     if (!imagePath.exists()) {
                                         imagePath.mkdirs();
                                     }
-                                    avatarFile = new File(imagePath.getPath(), curTime + ".jpg");
+                                    cameraFile = new File(imagePath.getPath(), curTime + ".jpg");
 
                                     intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-                                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(avatarFile));
+                                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile));
                                     startActivityForResult(intent, Const.REQUEST_CODE_CAMERA);
 
                                 } else {
@@ -313,14 +323,69 @@ public class CompanyInfoActivity extends BaseActivity {
         builder.show();
     }
 
+    /**
+     * 图片压缩并保存
+     * @param imgPath 图片路径
+     * @return 成功或失败
+     */
+    private boolean compressAndSave(String imgPath) {
+        Bitmap bitmap = ImageUtil.compressImage(imgPath, uploadSize);
+        if (bitmap == null) {
+            Toast.makeText(context, "压缩图片时出错", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        String currTime = AppTool.dateFormat(System.currentTimeMillis(), "yyyyMMddHHmmss");
+        File file = new File(Environment.getExternalStorageDirectory() + Const.APP_IMAGE_PATH, currTime + ".jpg");
+
+        switch (choosePosition) {
+            case 1:
+                licenseFile = file;
+                break;
+            case 2:
+                legalPersonFile = file;
+                break;
+            case 3:
+                legalPersonIDFile = file;
+                break;
+            default:
+                break;
+        }
+
+        //质量为100时，保存后的图片仍然大于指定大小
+        return ImageUtil.saveBitmap(bitmap, 90, file);
+    }
+
+    /**
+     * 刷新图片（本地）
+     */
+    private void refreshImage(String imgPath) {
+        if (compressAndSave(imgPath)) {
+            switch (choosePosition) {
+                case 1:
+                    Glide.with(context).load(licenseFile).into(imgViLicense);
+                    uploadList.add(licenseFile);
+                    break;
+                case 2:
+                    Glide.with(context).load(legalPersonFile).into(imgViLegalPerson);
+                    uploadList.add(legalPersonFile);
+                    break;
+                case 3:
+                    Glide.with(context).load(legalPersonIDFile).into(imgViLegalPersonID);
+                    uploadList.add(legalPersonIDFile);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Const.REQUEST_CODE_CAMERA) { // 拍照
-            if (avatarFile.exists()) {
-                Intent intent = new Intent(this, CutImageActivity.class);
-                intent.putExtra("path", avatarFile.getPath());
-                startActivityForResult(intent, 0);
+            if (cameraFile.exists()) {
+                refreshImage(cameraFile.getPath());
             }
 
         } else if (requestCode == Const.REQUEST_CODE_GALLERY) { // 从相册选择
@@ -328,29 +393,8 @@ public class CompanyInfoActivity extends BaseActivity {
                 Uri imgUri = data.getData();
                 String imgPath = ImageUtil.getImageAbsolutePath(this, imgUri);
                 if (!TextUtils.isEmpty(imgPath) && new File(imgPath).exists()) {
-                    Intent intent = new Intent(this, CutImageActivity.class);
-                    intent.putExtra("path", imgPath);
-                    startActivityForResult(intent, 0);
+                    refreshImage(imgPath);
                 }
-            }
-
-        } else if (resultCode == Const.RESULT_CODE_REFRESH_AVATAR) { //刷新图片
-            String imagePath = data.getStringExtra(Const.KEY_IMAGE_PATH);
-            switch (choosePosition) {
-                case 1:
-                    licensePath = imagePath;
-                    Glide.with(context).load(imagePath).into(imgViLicense);
-                    break;
-                case 2:
-                    legalPersonPath = imagePath;
-                    Glide.with(context).load(imagePath).into(imgViLegalPerson);
-                    break;
-                case 3:
-                    legalPersonIDPath = imagePath;
-                    Glide.with(context).load(imagePath).into(imgViLegalPersonID);
-                    break;
-                default:
-                    break;
             }
         }
     }
@@ -379,6 +423,18 @@ public class CompanyInfoActivity extends BaseActivity {
                 break;
             default:
                 break;
+        }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //清空压缩后的图片
+        for (File file : uploadList) {
+            if (file != null && file.exists()) {
+                file.delete();
+            }
         }
     }
 

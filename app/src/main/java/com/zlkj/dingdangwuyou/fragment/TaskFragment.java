@@ -213,6 +213,7 @@ public class TaskFragment extends BaseFragment {
     public void onItemClick(int position) {
         Intent intent = new Intent(context, TaskDetailUnstartedActivity.class);
         intent.putExtra(Const.KEY_OBJECT, taskList.get(position));
+        intent.putExtra(Const.KEY_NEED_MENU, true);
         startActivityForResult(intent, 0);
     }
 

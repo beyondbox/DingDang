@@ -1,13 +1,16 @@
 package com.zlkj.dingdangwuyou.activity;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.zlkj.dingdangwuyou.R;
+import com.zlkj.dingdangwuyou.adapter.TaskImageAdapter;
 import com.zlkj.dingdangwuyou.base.BaseActivity;
 import com.zlkj.dingdangwuyou.entity.Receiver;
 import com.zlkj.dingdangwuyou.entity.Task;
@@ -23,6 +26,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -60,6 +65,8 @@ public class TaskDetailPublishedUnderwayActivity extends BaseActivity {
     EditText txtPhone;
     @BindView(R.id.txtMessage)
     EditText txtMessage;
+    @BindView(R.id.gridViImg)
+    GridView gridViImg;
 
     @BindView(R.id.txtHandle)
     TextView txtHandle;
@@ -67,6 +74,8 @@ public class TaskDetailPublishedUnderwayActivity extends BaseActivity {
     TextView txtReceiver;
 
     private Task task;
+    private List<String> imgList;
+    private TaskImageAdapter imgAdapter;
 
     @Override
     protected int getContentViewId() {
@@ -78,7 +87,14 @@ public class TaskDetailPublishedUnderwayActivity extends BaseActivity {
         txtTitle.setText("任务详情");
 
         task = (Task) getIntent().getSerializableExtra(Const.KEY_OBJECT);
+        setList();
         setData();
+    }
+
+    private void setList() {
+        imgList = new ArrayList<String>();
+        imgAdapter = new TaskImageAdapter(context, imgList);
+        gridViImg.setAdapter(imgAdapter);
     }
 
     @Override
@@ -102,6 +118,13 @@ public class TaskDetailPublishedUnderwayActivity extends BaseActivity {
         txtPacketNum.setText(task.getT_hbnum());
         txtPhone.setText(task.getT_contact());
         txtMessage.setText(task.getT_words());
+
+        if (!TextUtils.isEmpty(task.getPicture())) {
+            String[] data = task.getPicture().split(",");
+            imgList.clear();
+            imgList.addAll(Arrays.asList(data));
+            imgAdapter.notifyDataSetChanged();
+        }
     }
 
     /**

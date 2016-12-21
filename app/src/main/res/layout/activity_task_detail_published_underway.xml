@@ -459,10 +459,19 @@
                 android:layout_height="wrap_content"
                 android:background="@color/TaskSection"
                 android:padding="15dp"
-                android:layout_marginBottom="80dp"
                 android:text="回传图片"
                 android:textSize="15sp"
                 android:textColor="@color/TaskSectionText"/>
+
+            <com.zlkj.dingdangwuyou.widget.NoScrollGridView
+                android:id="@+id/gridViImg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:numColumns="3"
+                android:horizontalSpacing="8dp"
+                android:verticalSpacing="8dp"
+                android:stretchMode="columnWidth"/>
 
          </LinearLayout>
     </ScrollView>

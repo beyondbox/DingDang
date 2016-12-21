@@ -17,7 +17,7 @@ import java.util.List;
  */
 
 public class PopMenuTaskTypeAdapter extends MyBaseAdapter<TaskTypeList.TaskType> {
-    public PopMenuTaskTypeAdapter(Context context, List list) {
+    public PopMenuTaskTypeAdapter(Context context, List<TaskTypeList.TaskType> list) {
         super(context, list);
     }
 

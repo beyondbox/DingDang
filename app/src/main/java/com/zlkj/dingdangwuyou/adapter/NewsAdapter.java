@@ -31,7 +31,7 @@ public class NewsAdapter extends MyBaseAdapter<News> {
     private int itemViewId;
     private int displayNum = 0; //listview显示的条数，不设置的情况下显示全部
 
-    public NewsAdapter(Context context, List list, int itemViewId) {
+    public NewsAdapter(Context context, List<News> list, int itemViewId) {
         super(context, list);
         this.itemViewId = itemViewId;
     }
