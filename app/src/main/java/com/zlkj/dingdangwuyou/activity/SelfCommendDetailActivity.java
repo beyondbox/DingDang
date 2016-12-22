@@ -140,6 +140,7 @@ public class SelfCommendDetailActivity extends BaseActivity {
 
     @OnClick({R.id.imgViBack, R.id.lLaytPhone})
     public void onClick(View view) {
+        Intent intent = null;
         switch (view.getId()) {
             case R.id.imgViBack:
                 finish();
@@ -149,6 +150,11 @@ public class SelfCommendDetailActivity extends BaseActivity {
                 if (!TextUtils.isEmpty(phone)) {
                     AppTool.dial(context, phone);
                 }
+                break;
+            case R.id.txtComplain:
+                intent = new Intent(context, ComplainHireActivity.class);
+                intent.putExtra(Const.KEY_TARGET_ID, selfCommend.getUi_id());
+                startActivity(intent);
                 break;
             default:
                 break;

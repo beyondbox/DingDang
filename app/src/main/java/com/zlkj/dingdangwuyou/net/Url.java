@@ -60,6 +60,10 @@ public class Url {
      */
     public static final String URL_USER_HIRE_LATEST = HOST + "/recruitmagi/companyrecruit!find3.action";
     /**
+     * 个人-投诉
+     */
+    public static final String URL_USER_COMPLAIN = HOST + "/recruitmagi/user!savetousu.action";
+    /**
      * 企业-招贤纳士-发布全职
      */
     public static final String URL_COM_MODIFY_FULLTIME = HOST + "/recruitmagi/companyrecruit!add.action";
@@ -79,6 +83,10 @@ public class Url {
      * 企业-招贤纳士-最新自荐信息
      */
     public static final String URL_COM_COMMEND_LATEST = HOST + "/recruitmagi/user!find4.action";
+    /**
+     * 企业-投诉
+     */
+    public static final String URL_COM_COMPLAIN = HOST + "/recruitmagi/companyrecruit!savetousu.action";
 
 
     /**

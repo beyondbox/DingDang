@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.zlkj.dingdangwuyou.R;
 import com.zlkj.dingdangwuyou.base.BaseActivity;
 import com.zlkj.dingdangwuyou.entity.HireInfo;
-import com.zlkj.dingdangwuyou.entity.SelfCommend;
 import com.zlkj.dingdangwuyou.utils.AppTool;
 import com.zlkj.dingdangwuyou.utils.Const;
 
@@ -149,7 +148,7 @@ public class PositionDetailActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.imgViBack, R.id.txtPhone, R.id.lLaytShowDetail})
+    @OnClick({R.id.imgViBack, R.id.txtPhone, R.id.lLaytShowDetail, R.id.txtComplain})
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
@@ -168,6 +167,11 @@ public class PositionDetailActivity extends BaseActivity {
                 }
                 intent = new Intent(context, CompanyDetailActivity.class);
                 intent.putExtra("id", hireInfo.getCpif_id());
+                startActivity(intent);
+                break;
+            case R.id.txtComplain:
+                intent = new Intent(context, ComplainHireActivity.class);
+                intent.putExtra(Const.KEY_TARGET_ID, hireInfo.getCpif_id());
                 startActivity(intent);
                 break;
             default:

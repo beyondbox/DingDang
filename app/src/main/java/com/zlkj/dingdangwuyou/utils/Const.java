@@ -45,6 +45,7 @@ public class Const {
     public static final String KEY_IMAGE_PATH = "imgPath";
     public static final String KEY_USER_NAME = "username";
     public static final String KEY_IDENTITY = "identity";
+    public static final String KEY_TARGET_ID = "targetId";
 
 
     public static final String ACTION_LOGIN_SUCCESS = "com.zlkj.dingdangwuyou.LOGIN_SUCCESS";

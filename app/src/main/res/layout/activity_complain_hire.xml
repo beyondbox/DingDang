@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@android:color/white"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include layout="@layout/common_title_bar"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/zhongxin"/>
+
+    <TextView
+        android:id="@+id/txtSubject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:text="投诉企业"
+        android:textColor="@color/blue"
+        android:textSize="16sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="@color/blue"
+        android:layout_marginTop="3dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:src="@mipmap/honor_time"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/honor_wrong"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/honor_mouth"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/honor_wrong1"/>
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/rdoGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <com.zlkj.dingdangwuyou.widget.MDMRadioButton
+            android:id="@+id/rdoBtn1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableLeft="@drawable/slt_release_positon_rdobtn"
+            android:drawablePadding="4dp"
+            android:text="不守时"
+            android:textSize="12sp"
+            android:textColor="@color/blackLight"/>
+
+        <com.zlkj.dingdangwuyou.widget.MDMRadioButton
+            android:id="@+id/rdoBtn2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableLeft="@drawable/slt_release_positon_rdobtn"
+            android:drawablePadding="4dp"
+            android:text="不守约"
+            android:textSize="12sp"
+            android:textColor="@color/blackLight"/>
+
+        <com.zlkj.dingdangwuyou.widget.MDMRadioButton
+            android:id="@+id/rdoBtn3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableLeft="@drawable/slt_release_positon_rdobtn"
+            android:drawablePadding="4dp"
+            android:text="信息虚假"
+            android:textSize="12sp"
+            android:textColor="@color/blackLight"/>
+
+        <com.zlkj.dingdangwuyou.widget.MDMRadioButton
+            android:id="@+id/rdoBtn4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableLeft="@drawable/slt_release_positon_rdobtn"
+            android:drawablePadding="4dp"
+            android:text="信息过期"
+            android:textSize="12sp"
+            android:textColor="@color/blackLight"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/txtConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="@drawable/slt_complain_bg"
+        android:text="确定"
+        android:textSize="14sp"
+        android:textColor="@android:color/white"/>
+
+</LinearLayout>
