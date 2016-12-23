@@ -9,12 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 import com.zlkj.dingdangwuyou.R;
 import com.zlkj.dingdangwuyou.base.MyBaseAdapter;
 import com.zlkj.dingdangwuyou.entity.News;
 import com.zlkj.dingdangwuyou.net.Url;
 import com.zlkj.dingdangwuyou.utils.AppTool;
+import com.zlkj.dingdangwuyou.utils.DisplayUtil;
 
 import java.util.List;
 
@@ -72,8 +73,10 @@ public class NewsAdapter extends MyBaseAdapter<News> {
 
         vh.txtTitle.setText(news.getTitle());
         if (!TextUtils.isEmpty(news.getNewsImg())) {
-            Glide.with(context)
+            Picasso.with(context)
                     .load(Url.HOST + news.getNewsImg())
+                    .resize(DisplayUtil.dip2px(context, 150), DisplayUtil.dip2px(context, 150))
+                    .centerCrop()
                     .placeholder(new ColorDrawable(context.getResources().getColor(R.color.grayLightBg)))
                     .error(new ColorDrawable(context.getResources().getColor(R.color.grayLightBg)))
                     .into(vh.imageView);

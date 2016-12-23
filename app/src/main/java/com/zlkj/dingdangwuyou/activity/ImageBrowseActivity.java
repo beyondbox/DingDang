@@ -4,10 +4,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 import com.zlkj.dingdangwuyou.R;
 import com.zlkj.dingdangwuyou.base.BaseActivity;
 import com.zlkj.dingdangwuyou.utils.Const;
+import com.zlkj.dingdangwuyou.utils.LogHelper;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -34,8 +35,11 @@ public class ImageBrowseActivity extends BaseActivity {
         txtTitle.setText("图片浏览");
 
         String imgPath = getIntent().getStringExtra(Const.KEY_IMAGE_PATH);
-        Glide.with(context)
+        LogHelper.e("imgPath", imgPath);
+        Picasso.with(context)
                 .load(imgPath)
+                .resize(2048, 2048)
+                .centerInside()
                 .placeholder(R.mipmap.image_loading)
                 .error(R.mipmap.image_error)
                 .into(imageView);

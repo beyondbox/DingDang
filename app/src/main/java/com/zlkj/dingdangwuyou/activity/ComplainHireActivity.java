@@ -39,7 +39,7 @@ public class ComplainHireActivity extends BaseActivity {
     @BindView(R.id.rdoBtn4)
     RadioButton rdoBtn4;
 
-    private int targetId; //被投诉方的id
+    private String targetId; //被投诉方的id
     private String content; //投诉内容
 
     @Override
@@ -50,7 +50,7 @@ public class ComplainHireActivity extends BaseActivity {
     @Override
     protected void initData() {
         txtTitle.setText("投诉衙门");
-        targetId = getIntent().getIntExtra(Const.KEY_TARGET_ID, 0);
+        targetId = getIntent().getStringExtra(Const.KEY_TARGET_ID);
 
         if (UserUtil.getUserType() == Const.USER_TYPE_COM) {
             rdoBtn3.setText("不告而别");
@@ -103,7 +103,8 @@ public class ComplainHireActivity extends BaseActivity {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
+                Toast.makeText(context, "投诉成功", Toast.LENGTH_SHORT).show();
+                finish();
             }
 
             @Override

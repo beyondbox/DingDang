@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.squareup.picasso.Picasso;
 import com.zlkj.dingdangwuyou.R;
 import com.zlkj.dingdangwuyou.activity.CompanyInfoActivity;
 import com.zlkj.dingdangwuyou.activity.ImageBrowseActivity;
@@ -29,6 +31,7 @@ import com.zlkj.dingdangwuyou.net.Url;
 import com.zlkj.dingdangwuyou.utils.Const;
 import com.zlkj.dingdangwuyou.utils.GsonUtil;
 import com.zlkj.dingdangwuyou.utils.UserUtil;
+import com.zlkj.dingdangwuyou.widget.BlurTransformation;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
@@ -51,6 +54,8 @@ public class MyCenterFragment extends BaseFragment {
     TextView txtUserName;
     @BindView(R.id.imgViAvatar)
     ImageView imgViAvatar;
+    @BindView(R.id.imgViBg)
+    ImageView imgViBg;
 
     private int userType;
 
@@ -61,6 +66,20 @@ public class MyCenterFragment extends BaseFragment {
 
     @Override
     protected void initData() {
+        //背景模糊效果
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            /*Picasso.with(context)
+                    .load(R.mipmap.zhongxin)
+                    .transform(new BlurTransfo(context))
+                    .into(imgViBg);*/
+            Glide.with(context)
+                    .load(R.mipmap.zhongxin)
+                    .transform(new BlurTransformation(context, 24))
+                    .crossFade(1000)
+                    .into(imgViBg);
+        }
+
+
         if (UserUtil.isLogin()) {
             loadUserInfo();
         }
@@ -161,9 +180,12 @@ public class MyCenterFragment extends BaseFragment {
             imgUrl = Url.HOST + user.getImg_frjqzp();
         }
 
-        Glide.with(context)
+        Picasso.with(context)
                 .load(imgUrl)
-                .dontAnimate()
+                .resize(300, 300)
+                .centerCrop()
+                .placeholder(R.mipmap.touxiang)
+                .error(R.mipmap.touxiang)
                 .into(imgViAvatar);
 
         //有姓名则显示，没有则显示帐号名

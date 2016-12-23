@@ -138,7 +138,7 @@ public class SelfCommendDetailActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.imgViBack, R.id.lLaytPhone})
+    @OnClick({R.id.imgViBack, R.id.lLaytPhone, R.id.txtComplain})
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {

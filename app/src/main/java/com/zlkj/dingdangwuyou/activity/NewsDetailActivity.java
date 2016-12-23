@@ -1,7 +1,6 @@
 package com.zlkj.dingdangwuyou.activity;
 
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,6 +13,7 @@ import com.zlkj.dingdangwuyou.entity.News;
 import com.zlkj.dingdangwuyou.net.Url;
 import com.zlkj.dingdangwuyou.utils.AppTool;
 import com.zlkj.dingdangwuyou.utils.Const;
+import com.zlkj.dingdangwuyou.utils.DisplayUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -55,8 +55,8 @@ public class NewsDetailActivity extends BaseActivity {
 
         Picasso.with(context)
                 .load(Url.HOST + news.getNewsImg())
-                .placeholder(new ColorDrawable(context.getResources().getColor(R.color.grayLightBg)))
-                .error(new ColorDrawable(context.getResources().getColor(R.color.grayLightBg)))
+                .resize(DisplayUtil.dip2px(context, 320), DisplayUtil.dip2px(context, 320))
+                .centerInside()
                 .into(imageView);
     }
 

@@ -8,12 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 import com.zlkj.dingdangwuyou.R;
 import com.zlkj.dingdangwuyou.base.MyBaseAdapter;
 import com.zlkj.dingdangwuyou.entity.SocialActivity;
 import com.zlkj.dingdangwuyou.net.Url;
 import com.zlkj.dingdangwuyou.utils.AppTool;
+import com.zlkj.dingdangwuyou.utils.DisplayUtil;
 
 import java.util.List;
 
@@ -47,8 +48,10 @@ public class SocialActivityListAdapter extends MyBaseAdapter<SocialActivity> {
         vh.txtTitle.setText(socialActivity.getG_title());
         vh.txtTime.setText(AppTool.dateFormat(socialActivity.getModifyDate().getTime(), "yyyy-MM-dd"));
 
-        Glide.with(context)
+        Picasso.with(context)
                 .load(Url.HOST + "/" + socialActivity.getG_imgurl())
+                .resize(DisplayUtil.dip2px(context, 150), DisplayUtil.dip2px(context, 150))
+                .centerCrop()
                 .placeholder(new ColorDrawable(context.getResources().getColor(R.color.grayLightBg)))
                 .error(new ColorDrawable(context.getResources().getColor(R.color.grayLightBg)))
                 .into(vh.imageView);

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.RadioButton;
 
 /**
@@ -16,20 +15,14 @@ public class MDMRadioButton extends RadioButton {
 
     public MDMRadioButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        // TODO Auto-generated constructor stub
     }
 
     public MDMRadioButton(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        // TODO Auto-generated constructor stub
     }
 
     public MDMRadioButton(Context context) {
         super(context);
-        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
