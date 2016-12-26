@@ -92,7 +92,7 @@ public class TaskDetailReceivedUnderwayActivity extends BaseActivity {
 
     private File cameraFile; //拍照文件
     private File uploadFile; //最终上传的图片文件
-    private int uploadSize = 500; //上传图片大小限制，单位KB
+    private int uploadSize = 300; //上传图片大小限制，单位KB
     private List<File> uploadList; //上传图片的集合(便于退出时清空压缩后的图片)
 
     private List<String> imgList;

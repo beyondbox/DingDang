@@ -47,7 +47,7 @@
             android:layout_height="80dp"
             android:layout_weight="1"
             android:layout_marginLeft="10dp"
-            android:src="@mipmap/honor_wrong"/>
+            android:src="@mipmap/honor_list"/>
 
         <ImageView
             android:layout_width="0dp"
@@ -61,7 +61,7 @@
             android:layout_height="80dp"
             android:layout_weight="1"
             android:layout_marginLeft="10dp"
-            android:src="@mipmap/honor_wrong1"/>
+            android:src="@mipmap/honor_wrong"/>
     </LinearLayout>
 
     <RadioGroup

@@ -79,7 +79,7 @@ public class CompanyInfoActivity extends BaseActivity {
 
     private int choosePosition; //当前点击更改图片的位置， 1营业执照、2法人近期照、3法人身份证
 
-    private int uploadSize = 500; //上传图片大小限制（单张），单位KB
+    private int uploadSize = 300; //上传图片大小限制（单张），单位KB
 
     private File licenseFile; //选择的营业执照图片（压缩后）
     private File legalPersonFile; //选择的法人近期照图片（压缩后）

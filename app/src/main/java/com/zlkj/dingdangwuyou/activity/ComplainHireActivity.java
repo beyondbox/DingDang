@@ -99,6 +99,7 @@ public class ComplainHireActivity extends BaseActivity {
             public void onStart() {
                 super.onStart();
                 pDialog.setMessage("正在提交，请稍候....");
+                pDialog.show();
             }
 
             @Override

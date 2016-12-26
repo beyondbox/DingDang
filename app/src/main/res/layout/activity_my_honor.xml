@@ -59,6 +59,7 @@
                         android:textColor="@color/gray"/>
 
                     <TextView
+                        android:id="@+id/txtHire1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -93,6 +94,7 @@
                         android:textColor="@color/gray"/>
 
                     <TextView
+                        android:id="@+id/txtHire2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -128,6 +130,7 @@
                         android:textColor="@color/gray"/>
 
                     <TextView
+                        android:id="@+id/txtHire3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -162,6 +165,7 @@
                         android:textColor="@color/gray"/>
 
                     <TextView
+                        android:id="@+id/txtHire4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"

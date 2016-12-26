@@ -146,4 +146,14 @@ public class Url {
      * 修改公司信息
      */
     public static final String URL_MODIFY_COM_INFO = HOST + "/mycenter/com_pany!modifycompany.action";
+
+
+    /**
+     * 荣誉记录——招贤纳士——个人
+     */
+    public static final String URL_HONOR_HIRE_PER = HOST + "/mycenter/creditlog!getcredit_z5.action";
+    /**
+     * 荣誉记录——招贤纳士——公司
+     */
+    public static final String URL_HONOR_HIRE_COM = HOST + "/mycenter/creditlog!getcredit_m.action";
 }
