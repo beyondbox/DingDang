@@ -224,6 +224,7 @@
                         android:textColor="@color/gray"/>
 
                     <TextView
+                        android:id="@+id/txtPublish1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -258,6 +259,7 @@
                         android:textColor="@color/gray"/>
 
                     <TextView
+                        android:id="@+id/txtPublish2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -317,6 +319,7 @@
                         android:textColor="@color/gray"/>
 
                     <TextView
+                        android:id="@+id/txtReceive1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -351,6 +354,7 @@
                         android:textColor="@color/gray"/>
 
                     <TextView
+                        android:id="@+id/txtReceive2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -385,6 +389,7 @@
                         android:textColor="@color/gray"/>
 
                     <TextView
+                        android:id="@+id/txtReceive3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -426,6 +431,7 @@
                         android:textColor="@color/gray"/>
 
                     <TextView
+                        android:id="@+id/txtReceive4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -460,6 +466,7 @@
                         android:textColor="@color/gray"/>
 
                     <TextView
+                        android:id="@+id/txtReceive5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"

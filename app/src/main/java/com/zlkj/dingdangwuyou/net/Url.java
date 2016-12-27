@@ -156,4 +156,12 @@ public class Url {
      * 荣誉记录——招贤纳士——公司
      */
     public static final String URL_HONOR_HIRE_COM = HOST + "/mycenter/creditlog!getcredit_m.action";
+    /**
+     * 荣誉记录——赏金
+     */
+    public static final String URL_HONOR_PUBLISH = HOST + "/mycenter/creditlog!getcredit_l.action";
+    /**
+     * 荣誉记录——猎金
+     */
+    public static final String URL_HONOR_RECEIVE = HOST + "/mycenter/creditlog!getcredit_s.action";
 }

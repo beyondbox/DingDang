@@ -1,11 +1,11 @@
 package com.zlkj.dingdangwuyou.entity;
 
 /**
- * 投诉
+ * 被投诉记录（招贤纳士——个人）
  * Created by Botx on 2016/12/21.
  */
 
-public class Complaint {
+public class ComplaintHirePer {
 
 
     /**
