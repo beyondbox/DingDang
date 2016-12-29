@@ -42,7 +42,6 @@ public class CutImageView extends ImageView{
 
     //裁剪类型：矩形、圆角矩形、圆形
     enum PathType{
-
         RECT,ROUNDRECT,OVAL
     }
     
@@ -199,7 +198,7 @@ public class CutImageView extends ImageView{
             }
 
             canvas.clipPath(path, Op.DIFFERENCE);  
-            canvas.drawColor(0xD2222222);//0xDF222222  
+            canvas.drawColor(0xDF222222);//0xD2222222
   
             //虚线  
             //DashPathEffect dashStyle = new DashPathEffect(new float[]{20, 20, 20, 20}, 2);  

@@ -21,6 +21,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 图像处理工具类
@@ -69,7 +71,7 @@ public class ImageUtil {
      * @param size　指定大小，单位KB
      * @return
      */
-    public static Bitmap compressImage(String imgPath, int size) {
+    /*public static Bitmap compressImage(String imgPath, int size) {
         //先按像素压缩了一下，防止像素过大
         Bitmap bitmap = compressImage(imgPath, 1920, 1080);
         if (bitmap == null) {
@@ -93,7 +95,47 @@ public class ImageUtil {
         }
 
         return bitmap;
+    }*/
+
+    /**
+     * 压缩图片，按质量压缩
+     * @param imgPath 图片路径
+     * @param size 目标大小，单位KB
+     * @return map中存放原bitmap和需要压缩到的质量
+     */
+    public static Map<String, Object> compressImage(String imgPath, int size) {
+        //压缩质量为100时，有时初始压缩后会比原图大，因为有时ＪＰＧ图片默认是以８０％的质量保存的
+        int quality = 80;
+        HashMap<String, Object> map = new HashMap<String, Object>();
+
+        //先按像素压缩了一下，防止像素过大
+        Bitmap bitmap = compressImage(imgPath, 1920, 1080);
+        if (bitmap == null) {
+            return null;
+        }
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, quality, baos);
+
+        if (baos.toByteArray().length > size * 1024) {
+            while (baos.toByteArray().length > size * 1024) { //循环判断压缩后图片是否大于指定大小,大于继续压缩
+                baos.reset(); //重置baos即清空baos
+                quality -= 10;
+                bitmap.compress(Bitmap.CompressFormat.JPEG, quality, baos);
+            }
+        }
+
+        try {
+            baos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        map.put(Const.KEY_BITMAP, bitmap);
+        map.put(Const.KEY_QUALITY, quality);
+        return map;
     }
+
 
     /**
      * 压缩图片，按像素压缩

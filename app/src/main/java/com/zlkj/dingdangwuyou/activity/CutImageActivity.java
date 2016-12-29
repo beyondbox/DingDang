@@ -166,7 +166,7 @@ public class CutImageActivity extends Activity implements OnClickListener{
 					file.getParentFile().mkdirs();
 				}
 				os = new FileOutputStream(file);
-				bitmap.compress(CompressFormat.JPEG, 100, os);
+				bitmap.compress(CompressFormat.JPEG, 90, os);
 				resultPath = file.getPath();
 				return true;
 			} catch (Exception e) {

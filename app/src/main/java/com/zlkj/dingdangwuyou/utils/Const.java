@@ -46,6 +46,8 @@ public class Const {
     public static final String KEY_USER_NAME = "username";
     public static final String KEY_IDENTITY = "identity";
     public static final String KEY_TARGET_ID = "targetId";
+    public static final String KEY_BITMAP = "bitmap";
+    public static final String KEY_QUALITY = "quality";
 
 
     public static final String ACTION_LOGIN_SUCCESS = "com.zlkj.dingdangwuyou.LOGIN_SUCCESS";

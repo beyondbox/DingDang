@@ -36,6 +36,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -329,8 +330,8 @@ public class CompanyInfoActivity extends BaseActivity {
      * @return 成功或失败
      */
     private boolean compressAndSave(String imgPath) {
-        Bitmap bitmap = ImageUtil.compressImage(imgPath, uploadSize);
-        if (bitmap == null) {
+        Map<String, Object> map = ImageUtil.compressImage(imgPath, uploadSize);
+        if (map == null) {
             Toast.makeText(context, "压缩图片时出错", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -352,8 +353,7 @@ public class CompanyInfoActivity extends BaseActivity {
                 break;
         }
 
-        //质量为100时，保存后的图片仍然大于指定大小
-        return ImageUtil.saveBitmap(bitmap, 90, file);
+        return ImageUtil.saveBitmap((Bitmap) map.get(Const.KEY_BITMAP), (int)map.get(Const.KEY_QUALITY), file);
     }
 
     /**
