@@ -1,7 +1,6 @@
 package com.zlkj.dingdangwuyou.activity;
 
 import android.app.DatePickerDialog;
-import android.graphics.PathDashPathEffect;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -17,13 +16,11 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.zlkj.dingdangwuyou.R;
-import com.zlkj.dingdangwuyou.adapter.PopMenuStringAdapter;
 import com.zlkj.dingdangwuyou.adapter.PopMenuTaskTypeAdapter;
 import com.zlkj.dingdangwuyou.base.BaseActivity;
 import com.zlkj.dingdangwuyou.entity.TaskTypeList;
 import com.zlkj.dingdangwuyou.net.MyHttpClient;
 import com.zlkj.dingdangwuyou.net.Url;
-import com.zlkj.dingdangwuyou.utils.AppTool;
 import com.zlkj.dingdangwuyou.utils.Const;
 import com.zlkj.dingdangwuyou.utils.UserUtil;
 import com.zlkj.dingdangwuyou.widget.PopMenu;
@@ -31,7 +28,6 @@ import com.zlkj.dingdangwuyou.widget.PopMenu;
 import org.apache.http.Header;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
