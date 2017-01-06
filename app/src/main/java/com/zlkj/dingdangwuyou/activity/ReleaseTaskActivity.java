@@ -1,6 +1,7 @@
 package com.zlkj.dingdangwuyou.activity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -205,7 +206,30 @@ public class ReleaseTaskActivity extends BaseActivity {
         return true;
     }
 
-    @OnClick({R.id.imgViBack, R.id.txtType, R.id.txtRelease, R.id.txtFinishTime})
+    /**
+     * 去支付
+     */
+    private void goToPay() {
+        String packetMoney = txtPacketMoney.getText().toString().trim();
+        String packetNum = txtPacketNum.getText().toString().trim();
+        if (TextUtils.isEmpty(packetMoney)) {
+            txtPacketMoney.setError("请输入红包金额");
+            txtPacketMoney.requestFocus();
+            return;
+        }
+        if (TextUtils.isEmpty(packetNum)) {
+            txtPacketNum.setError("请输入红包数量");
+            txtPacketNum.requestFocus();
+            return;
+        }
+
+        Intent intent = new Intent(context, PayActivity.class);
+        int money = Integer.valueOf(packetMoney) * Integer.valueOf(packetNum);
+        intent.putExtra(Const.KEY_MONEY, money + "");
+        startActivity(intent);
+    }
+
+    @OnClick({R.id.imgViBack, R.id.txtType, R.id.txtRelease, R.id.txtFinishTime, R.id.txtPay})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.imgViBack:
@@ -219,6 +243,9 @@ public class ReleaseTaskActivity extends BaseActivity {
                 break;
             case R.id.txtFinishTime:
                 dateDialog.show();
+                break;
+            case R.id.txtPay:
+                goToPay();
                 break;
             default:
                 break;

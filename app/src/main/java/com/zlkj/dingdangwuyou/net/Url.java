@@ -7,8 +7,8 @@ package com.zlkj.dingdangwuyou.net;
 
 public class Url {
 
-    public static final String HOST = "http://www.dingdangwuyou.com";
-    //public static final String HOST = "http://192.168.1.127:8080/dingdangwuyou";
+    //public static final String HOST = "http://www.dingdangwuyou.com";
+    public static final String HOST = "http://192.168.3.175:8088/dingdangwuyou";
 
 
     /**
@@ -105,6 +105,10 @@ public class Url {
      * 获取接令id
      */
     public static final String URL_TASK_GET_JIELING_ID = HOST + "/moneypenny/reward!zpxx.action";
+    /**
+     * 赏金—塞红包—微信支付
+     */
+    public static final String URL_TASK_PAY_WECHAT = HOST + "/moneypenny/reward!app.action";
 
 
     /**

@@ -12,6 +12,8 @@ public class Const {
     public static final String APP_FILE_PATH = "/dingdangwuyou";
     public static final String APP_IMAGE_PATH = APP_FILE_PATH + "/image";
 
+    public static final String WECHAT_APP_ID = "wx03543bd79ee35fca"; //微信支付APP_ID
+
 
     public static final int USER_TYPE_COM = 0; //企业用户
     public static final int USER_TYPE_PER = 1; //个人用户
@@ -48,6 +50,7 @@ public class Const {
     public static final String KEY_TARGET_ID = "targetId";
     public static final String KEY_BITMAP = "bitmap";
     public static final String KEY_QUALITY = "quality";
+    public static final String KEY_MONEY = "money";
 
 
     public static final String ACTION_LOGIN_SUCCESS = "com.zlkj.dingdangwuyou.LOGIN_SUCCESS";
