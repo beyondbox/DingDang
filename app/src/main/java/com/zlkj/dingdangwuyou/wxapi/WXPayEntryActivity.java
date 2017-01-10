@@ -1,7 +1,7 @@
 package com.zlkj.dingdangwuyou.wxapi;
 
 import android.content.Intent;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tencent.mm.sdk.constants.ConstantsAPI;
 import com.tencent.mm.sdk.modelbase.BaseReq;
@@ -14,17 +14,11 @@ import com.zlkj.dingdangwuyou.base.BaseActivity;
 import com.zlkj.dingdangwuyou.utils.Const;
 import com.zlkj.dingdangwuyou.utils.LogHelper;
 
-import butterknife.BindView;
-
 /**
  * 微信支付结果回调
  * Created by Botx on 2017/1/6.
  */
 public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandler{
-	@BindView(R.id.txtTitle)
-	TextView txtTitle;
-	@BindView(R.id.txtResult)
-	TextView txtResult;
 
     private IWXAPI api;
 
@@ -35,7 +29,6 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 
 	@Override
 	protected void initData() {
-		txtTitle.setText("支付结果");
 		api = WXAPIFactory.createWXAPI(this, Const.WECHAT_APP_ID);
 		api.handleIntent(getIntent(), this);
 	}
@@ -58,13 +51,17 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 		if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
 			switch (resp.errCode) {
 				case 0: //成功
-					txtResult.setText("支付成功");
+					sendBroadcast(new Intent(Const.ACTION_PAY_SUCCESS));
+					finish();
 					break;
 				case -1: //失败
-					txtResult.setText("支付失败");
+					sendBroadcast(new Intent(Const.ACTION_PAY_FAIL));
+					Toast.makeText(context, "支付失败", Toast.LENGTH_SHORT).show();
+					finish();
 					break;
 				case -2: //取消支付
-					txtResult.setText("取消支付");
+					//Toast.makeText(context, "您取消了支付", Toast.LENGTH_SHORT).show();
+					finish();
 					break;
 				default:
 					break;

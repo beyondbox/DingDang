@@ -1,7 +1,10 @@
 package com.zlkj.dingdangwuyou.activity;
 
 import android.app.DatePickerDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -100,6 +103,8 @@ public class ReleaseTaskActivity extends BaseActivity {
                 initPopMenu();
             }
         }, 200);
+
+        registerBroadcastReceiver();
     }
 
     private void initPopMenu() {
@@ -229,6 +234,23 @@ public class ReleaseTaskActivity extends BaseActivity {
         startActivity(intent);
     }
 
+
+    private void registerBroadcastReceiver() {
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Const.ACTION_PAY_SUCCESS);
+        context.registerReceiver(payReceiver, filter);
+    }
+
+    private BroadcastReceiver payReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(Const.ACTION_PAY_SUCCESS)) {
+                Toast.makeText(context, "支付成功", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
     @OnClick({R.id.imgViBack, R.id.txtType, R.id.txtRelease, R.id.txtFinishTime, R.id.txtPay})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -250,5 +272,12 @@ public class ReleaseTaskActivity extends BaseActivity {
             default:
                 break;
         }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(payReceiver);
     }
 }

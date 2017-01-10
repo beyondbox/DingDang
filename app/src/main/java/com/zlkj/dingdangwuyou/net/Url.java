@@ -7,8 +7,8 @@ package com.zlkj.dingdangwuyou.net;
 
 public class Url {
 
-    //public static final String HOST = "http://www.dingdangwuyou.com";
-    public static final String HOST = "http://192.168.3.175:8088/dingdangwuyou";
+    public static final String HOST = "http://www.dingdangwuyou.com";
+    //public static final String HOST = "http://192.168.3.175:8088/dingdangwuyou";
 
 
     /**

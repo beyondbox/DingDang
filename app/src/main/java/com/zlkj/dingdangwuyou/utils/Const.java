@@ -54,6 +54,8 @@ public class Const {
 
 
     public static final String ACTION_LOGIN_SUCCESS = "com.zlkj.dingdangwuyou.LOGIN_SUCCESS";
+    public static final String ACTION_PAY_SUCCESS = "com.zlkj.dingdangwuyou.PAY_SUCCESS";
+    public static final String ACTION_PAY_FAIL = "com.zlkj.dingdangwuyou.PAY_FAIL";
 
 
     public static final String TASK_STATUS_RELEASE = "0"; //任务状态——制作完

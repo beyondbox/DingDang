@@ -1,5 +1,9 @@
 package com.zlkj.dingdangwuyou.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,7 +50,9 @@ public class PayActivity extends BaseActivity {
         txtTitle.setText("支付");
         msgApi.registerApp(Const.WECHAT_APP_ID);
         money = getIntent().getStringExtra(Const.KEY_MONEY);
-        txtMoney.setText(money + "元");
+        txtMoney.setText("¥" + money + " 元");
+        pDialog.setCancelable(false);
+        registerBroadcastReceiver();
     }
 
     /**
@@ -102,6 +108,34 @@ public class PayActivity extends BaseActivity {
         });
     }
 
+    /**
+     * 检测微信是否安装
+     *
+     * @param api
+     * @return
+     */
+    private boolean isWXAppInstalledAndSupported(IWXAPI api) {
+        boolean result = api.isWXAppInstalled() && api.isWXAppSupportAPI();
+        return result;
+    }
+
+    private void registerBroadcastReceiver() {
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Const.ACTION_PAY_SUCCESS);
+        filter.addAction(Const.ACTION_PAY_FAIL);
+        context.registerReceiver(payReceiver, filter);
+    }
+
+    private BroadcastReceiver payReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(Const.ACTION_PAY_SUCCESS) || action.equals(Const.ACTION_PAY_FAIL)) {
+                finish();
+            }
+        }
+    };
+
     @OnClick({R.id.imgViBack, R.id.txtConfirm})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -109,10 +143,21 @@ public class PayActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.txtConfirm: //确认支付
-                getWeChatOrder();
+                if (isWXAppInstalledAndSupported(msgApi)) {
+                    getWeChatOrder();
+                } else {
+                    Toast.makeText(context, "您还没有安装微信", Toast.LENGTH_SHORT).show();
+                }
                 break;
             default:
                 break;
         }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(payReceiver);
     }
 }
