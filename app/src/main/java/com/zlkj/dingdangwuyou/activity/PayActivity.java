@@ -18,6 +18,7 @@ import com.zlkj.dingdangwuyou.base.BaseActivity;
 import com.zlkj.dingdangwuyou.net.MyHttpClient;
 import com.zlkj.dingdangwuyou.net.Url;
 import com.zlkj.dingdangwuyou.utils.Const;
+import com.zlkj.dingdangwuyou.utils.UserUtil;
 
 import org.apache.http.Header;
 import org.json.JSONException;
@@ -62,6 +63,8 @@ public class PayActivity extends BaseActivity {
         RequestParams params = new RequestParams();
         params.put("body", "叮当无忧");
         params.put("total_fee", money);
+        params.put("id", UserUtil.getUserInfo().getId());
+
         MyHttpClient.getInstance().post(Url.URL_TASK_PAY_WECHAT, params, new AsyncHttpResponseHandler() {
             @Override
             public void onStart() {

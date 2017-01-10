@@ -25,7 +25,6 @@ import com.zlkj.dingdangwuyou.utils.UserUtil;
 import com.zlkj.dingdangwuyou.widget.PopMenu;
 
 import org.apache.http.Header;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -101,7 +100,7 @@ public class PartTimeConditionFragment extends BaseFragment {
         sexList.add("男");
         sexList.add("女");
 
-        View contentView = LayoutInflater.from(context).inflate(R.layout.commen_popmenu_content, null);
+        View contentView = LayoutInflater.from(context).inflate(R.layout.common_popmenu_content, null);
         ListView lvData = (ListView) contentView.findViewById(R.id.lvData);
         popMenuSex = new PopMenu(txtSex.getMeasuredWidth(), ViewGroup.LayoutParams.WRAP_CONTENT, contentView,
                 lvData, new PopMenuStringAdapter(context, sexList));

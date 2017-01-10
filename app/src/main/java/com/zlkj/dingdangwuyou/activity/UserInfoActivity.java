@@ -247,7 +247,7 @@ public class UserInfoActivity extends BaseActivity {
         sexList.add("男");
         sexList.add("女");
 
-        View contentView = LayoutInflater.from(context).inflate(R.layout.commen_popmenu_content, null);
+        View contentView = LayoutInflater.from(context).inflate(R.layout.common_popmenu_content, null);
         ListView lvData = (ListView) contentView.findViewById(R.id.lvData);
         popMenuSex = new PopMenu(txtSex.getMeasuredWidth(), ViewGroup.LayoutParams.WRAP_CONTENT, contentView,
                 lvData, new PopMenuStringAdapter(context, sexList));
@@ -266,7 +266,7 @@ public class UserInfoActivity extends BaseActivity {
         marriageList.add("未婚");
         marriageList.add("已婚");
 
-        View contentView = LayoutInflater.from(context).inflate(R.layout.commen_popmenu_content, null);
+        View contentView = LayoutInflater.from(context).inflate(R.layout.common_popmenu_content, null);
         ListView lvData = (ListView) contentView.findViewById(R.id.lvData);
         popMenuMarriage = new PopMenu(txtMarriage.getMeasuredWidth(), ViewGroup.LayoutParams.WRAP_CONTENT, contentView,
                 lvData, new PopMenuStringAdapter(context, marriageList));

@@ -1,7 +1,6 @@
 package com.zlkj.dingdangwuyou.widget;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -16,15 +15,11 @@ import android.widget.Toast;
 
 import com.zlkj.dingdangwuyou.R;
 import com.zlkj.dingdangwuyou.adapter.PopMenuStringAdapter;
-import com.zlkj.dingdangwuyou.adapter.PopMenuTaskTypeAdapter;
-import com.zlkj.dingdangwuyou.entity.TaskTypeList;
 import com.zlkj.dingdangwuyou.utils.Const;
 import com.zlkj.dingdangwuyou.utils.UserUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.ButterKnife;
 
 /**
  * 申请接任务对话框
@@ -138,7 +133,7 @@ public class ApplyTaskDialog implements View.OnClickListener{
         sexList.add("男");
         sexList.add("女");
 
-        View contentView = LayoutInflater.from(context).inflate(R.layout.commen_popmenu_content, null);
+        View contentView = LayoutInflater.from(context).inflate(R.layout.common_popmenu_content, null);
         ListView lvData = (ListView) contentView.findViewById(R.id.lvData);
         popMenuSex = new PopMenu(txtSex.getMeasuredWidth(), ViewGroup.LayoutParams.WRAP_CONTENT, contentView,
                 lvData, new PopMenuStringAdapter(context, sexList));

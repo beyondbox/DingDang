@@ -108,7 +108,7 @@ public class ReleaseTaskActivity extends BaseActivity {
     }
 
     private void initPopMenu() {
-        View contentView = LayoutInflater.from(context).inflate(R.layout.commen_popmenu_content, null);
+        View contentView = LayoutInflater.from(context).inflate(R.layout.common_popmenu_content, null);
         ListView lvData = (ListView) contentView.findViewById(R.id.lvData);
         popMenuType = new PopMenu(txtType.getMeasuredWidth(), ViewGroup.LayoutParams.WRAP_CONTENT, contentView,
                 lvData, new PopMenuTaskTypeAdapter(context, typeList));
