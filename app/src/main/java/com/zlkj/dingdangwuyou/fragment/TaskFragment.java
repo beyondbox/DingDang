@@ -195,7 +195,7 @@ public class TaskFragment extends BaseFragment {
             case R.id.txtRight:
                 if (UserUtil.isLogin()) {
                     Intent intent = new Intent(context, ReleaseTaskActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent, 0);
                 } else {
                     Intent intent = new Intent(context, LoginChooseActivity.class);
                     startActivityForResult(intent, 0);
@@ -222,8 +222,11 @@ public class TaskFragment extends BaseFragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Const.RESULT_CODE_LOGIN_SUCCEED) {
             Intent intent = new Intent(context, ReleaseTaskActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, 0);
         } else if (resultCode == Const.RESULT_CODE_APPLY_TASK_SUCCEED) {
+            pDialog.show();
+            getTaskData();
+        } else if (resultCode == Const.RESULT_CODE_RELEASE_TASK_SUCCEED) {
             pDialog.show();
             getTaskData();
         }

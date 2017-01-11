@@ -27,12 +27,13 @@ public class Const {
 
 
     public static final int RESULT_CODE_LOGIN_SUCCEED = 1000; //登录成功
-    public static final int RESULT_CODE_RELEASE_SUCCEED = 1001; //发布成功
+    public static final int RESULT_CODE_RELEASE_SUCCEED = 1001; //招贤纳士——发布成功
     public static final int RESULT_CODE_APPLY_TASK_SUCCEED = 1002; //申请接任务成功
     public static final int REQUEST_CODE_CAMERA = 1003; //拍照
     public static final int REQUEST_CODE_GALLERY = 1004; //从相册选择
     public static final int RESULT_CODE_REFRESH_AVATAR = 1005; //刷新用户头像
     public static final int RESULT_CODE_SAVE_SUCCEED = 1006; //保存成功
+    public static final int RESULT_CODE_RELEASE_TASK_SUCCEED = 1007; //任务——发布成功
 
     public static final int REQUEST_CODE_HIRE = 2000;
 

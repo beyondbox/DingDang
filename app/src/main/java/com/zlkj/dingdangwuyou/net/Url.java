@@ -105,10 +105,7 @@ public class Url {
      * 获取接令id
      */
     public static final String URL_TASK_GET_JIELING_ID = HOST + "/moneypenny/reward!zpxx.action";
-    /**
-     * 赏金—塞红包—微信支付
-     */
-    public static final String URL_TASK_PAY_WECHAT = HOST + "/moneypenny/reward!app.action";
+
 
 
     /**
@@ -168,4 +165,14 @@ public class Url {
      * 荣誉记录——猎金
      */
     public static final String URL_HONOR_RECEIVE = HOST + "/mycenter/creditlog!getcredit_s.action";
+
+
+    /**
+     * 赏金—塞红包—微信支付
+     */
+    public static final String URL_TASK_PAY_WECHAT = HOST + "/moneypenny/reward!app.action";
+    /**
+     * 微信支付结果查询
+     */
+    public static final String URL_TASK_PAY_WECHAT_QUERY = HOST + "/moneypenny/reward!appc.action";
 }

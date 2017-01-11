@@ -61,6 +61,7 @@
         </activity>
         <activity android:name=".wxapi.WXPayEntryActivity"
                   android:launchMode="singleTop"
+                  android:theme="@android:style/Theme.Translucent.NoTitleBar"
                   android:exported="true"/>
     </application>
 

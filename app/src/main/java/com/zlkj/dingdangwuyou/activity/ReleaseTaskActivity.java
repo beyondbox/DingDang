@@ -45,6 +45,10 @@ import butterknife.OnClick;
 public class ReleaseTaskActivity extends BaseActivity {
     @BindView(R.id.txtTitle)
     TextView txtTitle;
+    @BindView(R.id.txtPay)
+    TextView txtPay;
+    @BindView(R.id.txtRelease)
+    TextView txtRelease;
 
     @BindView(R.id.txtType)
     TextView txtType;
@@ -83,6 +87,7 @@ public class ReleaseTaskActivity extends BaseActivity {
     @Override
     protected void initData() {
         txtTitle.setText("发布任务");
+        pDialog.setCancelable(false);
 
         //去掉“不限”类型
         typeList = TaskTypeList.list.subList(0, TaskTypeList.list.size() - 1);
@@ -141,8 +146,8 @@ public class ReleaseTaskActivity extends BaseActivity {
         params.put("t_status", txtIdentity.getText().toString().trim());
         params.put("t_area", txtArea.getText().toString().trim());
         params.put("t_num", txtCount.getText().toString().trim());
-        params.put("t_money", txtPacketMoney.getText().toString().trim());
-        params.put("t_hbnum", txtPacketNum.getText().toString().trim());
+        params.put("t_money", Integer.valueOf(txtPacketMoney.getText().toString().trim()));
+        params.put("t_hbnum", Integer.valueOf(txtPacketNum.getText().toString().trim()));
         params.put("t_words", txtMessage.getText().toString().trim());
         params.put("t_contact", txtPhone.getText().toString().trim());
         params.put("r_id", Const.TASK_STATUS_RELEASE);
@@ -151,13 +156,15 @@ public class ReleaseTaskActivity extends BaseActivity {
             @Override
             public void onStart() {
                 super.onStart();
-                pDialog.setMessage("正在提交，请稍候....");
+                pDialog.setMessage("正在发布任务，请稍候....");
                 pDialog.show();
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                Toast.makeText(context, "发布成功", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "发布任务成功", Toast.LENGTH_SHORT).show();
+                setResult(Const.RESULT_CODE_RELEASE_TASK_SUCCEED);
+                finish();
             }
 
             @Override
@@ -215,18 +222,12 @@ public class ReleaseTaskActivity extends BaseActivity {
      * 去支付
      */
     private void goToPay() {
+        if (!isRequiredOk()) {
+            return;
+        }
+
         String packetMoney = txtPacketMoney.getText().toString().trim();
         String packetNum = txtPacketNum.getText().toString().trim();
-        if (TextUtils.isEmpty(packetMoney)) {
-            txtPacketMoney.setError("请输入红包金额");
-            txtPacketMoney.requestFocus();
-            return;
-        }
-        if (TextUtils.isEmpty(packetNum)) {
-            txtPacketNum.setError("请输入红包数量");
-            txtPacketNum.requestFocus();
-            return;
-        }
 
         Intent intent = new Intent(context, PayActivity.class);
         int money = Integer.valueOf(packetMoney) * Integer.valueOf(packetNum);
@@ -247,11 +248,19 @@ public class ReleaseTaskActivity extends BaseActivity {
             String action = intent.getAction();
             if (action.equals(Const.ACTION_PAY_SUCCESS)) {
                 Toast.makeText(context, "支付成功", Toast.LENGTH_SHORT).show();
+                txtPay.setVisibility(View.GONE);
+                txtRelease.setVisibility(View.VISIBLE);
+                txtPacketMoney.setFocusable(false);
+                txtPacketMoney.setFocusableInTouchMode(false);
+                txtPacketNum.setFocusable(false);
+                txtPacketNum.setFocusableInTouchMode(false);
+
+                release();
             }
         }
     };
 
-    @OnClick({R.id.imgViBack, R.id.txtType, R.id.txtRelease, R.id.txtFinishTime, R.id.txtPay})
+    @OnClick({R.id.imgViBack, R.id.txtType, R.id.txtFinishTime, R.id.txtPay, R.id.txtRelease})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.imgViBack:
@@ -260,14 +269,14 @@ public class ReleaseTaskActivity extends BaseActivity {
             case R.id.txtType:
                 popMenuType.showAsDropDown(txtType, 0, 10);
                 break;
-            case R.id.txtRelease:
-                release();
-                break;
             case R.id.txtFinishTime:
                 dateDialog.show();
                 break;
             case R.id.txtPay:
                 goToPay();
+                break;
+            case R.id.txtRelease:
+                release();
                 break;
             default:
                 break;
