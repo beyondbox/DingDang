@@ -224,10 +224,8 @@ public class TaskFragment extends BaseFragment {
             Intent intent = new Intent(context, ReleaseTaskActivity.class);
             startActivityForResult(intent, 0);
         } else if (resultCode == Const.RESULT_CODE_APPLY_TASK_SUCCEED) {
-            pDialog.show();
             getTaskData();
         } else if (resultCode == Const.RESULT_CODE_RELEASE_TASK_SUCCEED) {
-            pDialog.show();
             getTaskData();
         }
     }
