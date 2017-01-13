@@ -12,20 +12,44 @@
         android:layout_centerVertical="true"
         android:src="@mipmap/touxiang"/>
 
-    <ImageView
-        android:id="@+id/imgViChoose"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:layout_marginLeft="30dp"
-        android:src="@mipmap/uncheck"
+    <RelativeLayout
+        android:id="@+id/rLaytHandle"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true">
+
+        <ImageView
+            android:id="@+id/imgViChoose"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/uncheck"/>
+
+        <TextView
+            android:id="@+id/txtGiveMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="2dp"
+            android:background="@drawable/slt_show_all_bg"
+            android:text="发放\n赏金"
+            android:textSize="13sp"
+            android:textColor="@android:color/white"/>
+    </RelativeLayout>
+
+
 
     <RelativeLayout
         android:id="@+id/rLaytData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/imgViChoose"
+        android:layout_toLeftOf="@id/rLaytHandle"
         android:layout_centerVertical="true">
 
         <TextView

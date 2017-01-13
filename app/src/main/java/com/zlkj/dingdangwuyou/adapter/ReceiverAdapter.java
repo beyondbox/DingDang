@@ -26,6 +26,7 @@ import butterknife.ButterKnife;
 
 public class ReceiverAdapter extends MyBaseAdapter<Receiver> {
     public static final int TAG_CHOOSE_RECEIVER = 2000;
+    public static final int TAG_GIVE_MONEY = 2001;
 
     public ReceiverAdapter(Context context, List<Receiver> list) {
         super(context, list);
@@ -53,13 +54,21 @@ public class ReceiverAdapter extends MyBaseAdapter<Receiver> {
         int status = Integer.valueOf(receiver.getJltai());
         switch (status) {
             case Const.JIELING_STATUS_UNDERWAY: //任务进行中
-                vh.imgViChoose.setImageResource(R.mipmap.check);
-                vh.imgViChoose.setEnabled(false);
+                vh.imgViChoose.setVisibility(View.GONE);
+                vh.txtGiveMoney.setVisibility(View.VISIBLE);
                 vh.lLaytPhone.setVisibility(View.VISIBLE);
+                vh.txtGiveMoney.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (onWhichClickListener != null) {
+                            onWhichClickListener.onWhichClick(v, position, TAG_GIVE_MONEY);
+                        }
+                    }
+                });
                 break;
             case Const.JIELING_STATUS_FRESH: //新手接任务
-                vh.imgViChoose.setImageResource(R.mipmap.uncheck);
-                vh.imgViChoose.setEnabled(true);
+                vh.imgViChoose.setVisibility(View.VISIBLE);
+                vh.txtGiveMoney.setVisibility(View.GONE);
                 vh.lLaytPhone.setVisibility(View.GONE);
                 vh.imgViChoose.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -92,5 +101,7 @@ public class ReceiverAdapter extends MyBaseAdapter<Receiver> {
         TextView txtDate;
         @BindView(R.id.imgViChoose)
         ImageView imgViChoose;
+        @BindView(R.id.txtGiveMoney)
+        TextView txtGiveMoney;
     }
 }

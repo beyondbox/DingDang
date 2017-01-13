@@ -4,7 +4,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -186,6 +188,27 @@ public class ChooseReceiverActivity extends BaseActivity implements MyBaseAdapte
         return result;
     }
 
+    /**
+     * 发放赏金对话框
+     */
+    private void showGiveMoneyDialog(final int position) {
+        final AlertDialog dialog = new AlertDialog.Builder(context).create();
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_give_money, null);
+        dialog.setView(view);
+
+        final EditText txtMoney = (EditText) view.findViewById(R.id.txtMoney);
+        TextView txtConfirm = (TextView) view.findViewById(R.id.txtConfirm);
+        txtConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                Toast.makeText(context, "给" + position + "发放" + txtMoney.getText().toString() + "元", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        dialog.show();
+    }
+
     @OnItemClick(R.id.lvData)
     public void onItemClick(int position) {
         Receiver receiver = receiverList.get(position);
@@ -227,6 +250,9 @@ public class ChooseReceiverActivity extends BaseActivity implements MyBaseAdapte
                         })
                         .setNegativeButton("取消", null)
                         .show();
+                break;
+            case ReceiverAdapter.TAG_GIVE_MONEY: //发放赏金
+                showGiveMoneyDialog(position);
                 break;
             default:
                 break;
