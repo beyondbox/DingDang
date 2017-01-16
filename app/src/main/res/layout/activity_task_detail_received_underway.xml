@@ -257,7 +257,7 @@
                         android:layout_height="wrap_content"
                         android:editable="false"
                         android:background="@null"
-                        android:text="石家庄"
+                        android:text=""
                         android:textSize="14sp"
                         android:textColor="@color/homeTabNormal"/>
                 </LinearLayout>

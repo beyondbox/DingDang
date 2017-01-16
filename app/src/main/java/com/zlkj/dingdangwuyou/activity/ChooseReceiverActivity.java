@@ -27,6 +27,7 @@ import com.zlkj.dingdangwuyou.net.Url;
 import com.zlkj.dingdangwuyou.utils.AppTool;
 import com.zlkj.dingdangwuyou.utils.Const;
 import com.zlkj.dingdangwuyou.utils.GsonUtil;
+import com.zlkj.dingdangwuyou.utils.UserUtil;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
@@ -65,6 +66,7 @@ public class ChooseReceiverActivity extends BaseActivity implements MyBaseAdapte
     @Override
     protected void initData() {
         txtTitle.setText("接令人");
+        pDialog.setCancelable(false);
 
         task = (Task) getIntent().getSerializableExtra(Const.KEY_OBJECT);
         receiverList = new ArrayList<Receiver>();
@@ -173,6 +175,40 @@ public class ChooseReceiverActivity extends BaseActivity implements MyBaseAdapte
     }
 
     /**
+     * 发放赏金
+     */
+    private void giveMoney(int money, String jl_id) {
+        RequestParams params = new RequestParams();
+        params.put("u_id", UserUtil.getUserInfo().getId());
+        params.put("name", money);
+        params.put("jl_id", jl_id);
+
+        MyHttpClient.getInstance().post(Url.URL_TASK_GIVE_MONEY, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onStart() {
+                super.onStart();
+                pDialog.show();
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(context, getResources().getString(R.string.request_fail), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
+                pDialog.dismiss();
+            }
+        });
+    }
+
+    /**
      * 获取已选择的接令人数量
      * @return
      */
@@ -201,8 +237,14 @@ public class ChooseReceiverActivity extends BaseActivity implements MyBaseAdapte
         txtConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String money = txtMoney.getText().toString().trim();
+                if (TextUtils.isEmpty(money)) {
+                    Toast.makeText(context, "请输入发放金额", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 dialog.dismiss();
-                Toast.makeText(context, "给" + position + "发放" + txtMoney.getText().toString() + "元", Toast.LENGTH_SHORT).show();
+                giveMoney(Integer.valueOf(money), receiverList.get(position).getId());
             }
         });
 

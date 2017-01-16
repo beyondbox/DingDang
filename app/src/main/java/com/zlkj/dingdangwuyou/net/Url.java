@@ -29,6 +29,7 @@ public class Url {
     public static final String URL_REGISTER_COM = HOST + "/mycenter/com_pany!register.action";
 
 
+
     /**
      * 获取所有新闻
      */
@@ -37,6 +38,7 @@ public class Url {
      * 获取所有公益活动
      */
     public static final String URL_GET_SOCIAL_ACTIVITY = HOST + "/mycenter/news!getAllGongyi.action";
+
 
 
     /**
@@ -89,6 +91,8 @@ public class Url {
     public static final String URL_COM_COMPLAIN = HOST + "/recruitmagi/companyrecruit!savetousu.action";
 
 
+
+
     /**
      * 赏金-任务发布
      */
@@ -105,6 +109,14 @@ public class Url {
      * 获取接令id
      */
     public static final String URL_TASK_GET_JIELING_ID = HOST + "/moneypenny/reward!zpxx.action";
+    /**
+     * 赏金——发放赏金
+     */
+    public static final String URL_TASK_GIVE_MONEY = HOST + "/moneypenny/reward!tuihui.action";
+    /**
+     * 赏金——确认完成
+     */
+    public static final String URL_TASK_CONFIRM_FINISH = HOST + "/moneypenny/reward!qrrw.action";
 
 
 
@@ -131,6 +143,7 @@ public class Url {
 
 
 
+
     /**
      * 获取个人信息
      */
@@ -149,6 +162,8 @@ public class Url {
     public static final String URL_MODIFY_COM_INFO = HOST + "/mycenter/com_pany!modifycompany.action";
 
 
+
+
     /**
      * 荣誉记录——招贤纳士——个人
      */
@@ -165,6 +180,8 @@ public class Url {
      * 荣誉记录——猎金
      */
     public static final String URL_HONOR_RECEIVE = HOST + "/mycenter/creditlog!getcredit_s.action";
+
+
 
 
     /**

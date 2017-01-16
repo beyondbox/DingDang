@@ -216,9 +216,9 @@ public class ReceivedTaskActivity extends BaseActivity {
                 startActivityForResult(intent, 0);
                 break;
             case R.id.rdoBtnFinished:
-                /*intent = new Intent(context, TaskDetailPublishedUnderwayActivity.class);
-                intent.putExtra(Const.KEY_OBJECT, finishedList.get(position));
-                startActivity(intent);*/
+                intent = new Intent(context, TaskDetailFinishedActivity.class);
+                intent.putExtra(Const.KEY_OBJECT, finishedList.get(position).getTask());
+                startActivity(intent);
                 break;
             default:
                 break;

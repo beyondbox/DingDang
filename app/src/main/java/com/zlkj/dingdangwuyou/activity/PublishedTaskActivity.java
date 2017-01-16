@@ -209,9 +209,9 @@ public class PublishedTaskActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.rdoBtnFinished:
-                /*intent = new Intent(context, TaskDetailPublishedUnderwayActivity.class);
+                intent = new Intent(context, TaskDetailFinishedActivity.class);
                 intent.putExtra(Const.KEY_OBJECT, finishedList.get(position));
-                startActivity(intent);*/
+                startActivity(intent);
                 break;
             default:
                 break;
