@@ -12,7 +12,7 @@
     <!--首页栏目-->
     <color name="homeSection">#F1674A</color>
 
-    <!--日进斗金栏目-->
+    <!--生活帮帮栏目-->
     <color name="TaskSection">#F7F7F7</color>
     <color name="TaskSectionText">#E98A7F</color>
 

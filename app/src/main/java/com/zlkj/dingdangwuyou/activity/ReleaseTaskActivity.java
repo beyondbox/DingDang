@@ -255,7 +255,12 @@ public class ReleaseTaskActivity extends BaseActivity {
                 txtPacketNum.setFocusable(false);
                 txtPacketNum.setFocusableInTouchMode(false);
 
-                release();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        release();
+                    }
+                }, 200);
             }
         }
     };

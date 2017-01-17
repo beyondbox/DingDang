@@ -172,12 +172,30 @@ public class TaskDetailPublishedUnderwayActivity extends BaseActivity {
     private void confirmFinish(String jl_id) {
         RequestParams params = new RequestParams();
         params.put("jl_id", jl_id);
+        params.put("id", task.getId());
 
         MyHttpClient.getInstance().post(Url.URL_TASK_CONFIRM_FINISH, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String jsonStr = new String(responseBody);
                 LogHelper.e("ConfirmFinish", jsonStr);
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+                    String result = jsonObj.getString("result");
+                    if (threadCount == 1) {
+                        if (result.equals("true")) {
+                            Toast.makeText(context, "确认成功", Toast.LENGTH_SHORT).show();
+                            setResult(Const.RESULT_CODE_CONFIRM_TASK_SUCCEED);
+                            finish();
+                        } else {
+                            Toast.makeText(context, "确认失败", Toast.LENGTH_SHORT).show();
+                            getReceiver();
+                        }
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -239,10 +257,10 @@ public class TaskDetailPublishedUnderwayActivity extends BaseActivity {
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        pDialog.setCancelable(false);
+                        pDialog.setMessage("正在提交，请稍候....");
+                        pDialog.show();
                         for (int i = 0; i < threadCount; i++) {
-                            pDialog.setCancelable(false);
-                            pDialog.setMessage("正在提交，请稍候....");
-                            pDialog.show();
                             confirmFinish(chooseReceiverList.get(i).getId());
                         }
                     }

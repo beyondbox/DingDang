@@ -39,11 +39,9 @@
         <activity android:name=".activity.PositionDetailActivity"/>
         <activity android:name=".activity.HireListAllActivity"/>
         <activity android:name=".activity.CompanyDetailActivity"/>
-        <activity android:name=".activity.ReleaseTaskActivity"/>
         <activity android:name=".activity.CutImageActivity"/>
         <activity android:name=".activity.ImageBrowseActivity"/>
         <activity android:name=".activity.MyHonorActivity"/>
-        <activity android:name=".activity.MyWalletActivity"/>
         <activity android:name=".activity.PublishedTaskActivity"/>
         <activity android:name=".activity.TaskDetailUnstartedActivity"/>
         <activity android:name=".activity.TaskDetailPublishedUnderwayActivity"/>
@@ -53,17 +51,20 @@
         <activity android:name=".activity.ComplainHireActivity"/>
         <activity android:name=".activity.PayActivity"/>
         <activity android:name=".activity.TaskDetailFinishedActivity"/>
+        <activity android:name=".activity.RechargeActivity"/>
 
         <activity android:name=".activity.UserInfoActivity"
-            android:windowSoftInputMode="stateHidden">
-        </activity>
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activity.CompanyInfoActivity"
-            android:windowSoftInputMode="stateHidden">
-        </activity>
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".wxapi.WXPayEntryActivity"
                   android:launchMode="singleTop"
                   android:theme="@style/Transparent"
                   android:exported="true"/>
+        <activity android:name=".activity.MyWalletActivity"
+            android:theme="@style/NoCloseEnterAnimTheme"/>
+        <activity android:name=".activity.ReleaseTaskActivity"
+            android:theme="@style/NoCloseEnterAnimTheme"/>
     </application>
 
 </manifest>

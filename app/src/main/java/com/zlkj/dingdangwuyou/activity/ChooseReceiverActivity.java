@@ -27,6 +27,7 @@ import com.zlkj.dingdangwuyou.net.Url;
 import com.zlkj.dingdangwuyou.utils.AppTool;
 import com.zlkj.dingdangwuyou.utils.Const;
 import com.zlkj.dingdangwuyou.utils.GsonUtil;
+import com.zlkj.dingdangwuyou.utils.LogHelper;
 import com.zlkj.dingdangwuyou.utils.UserUtil;
 
 import org.apache.http.Header;
@@ -109,8 +110,7 @@ public class ChooseReceiverActivity extends BaseActivity implements MyBaseAdapte
                     JSONObject jsonObj = new JSONObject(jsonStr);
                     JSONArray jsonArr = jsonObj.getJSONArray("items");
                     List<Receiver> list = GsonUtil.getEntityList(jsonArr.toString(), Receiver.class);
-                    receiverList.clear();
-                    receiverList.addAll(list);
+                    filterReceivers(list);
                     receiverAdapter.notifyDataSetChanged();
 
                     txtTitle.setText("接令人 (" + getChooseReceiverNum() + "/" + receiverList.size() + ")");
@@ -149,10 +149,12 @@ public class ChooseReceiverActivity extends BaseActivity implements MyBaseAdapte
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String result = new String(responseBody);
+                LogHelper.e("ChooseReceiver", result);
                 if (result.equals("true")) {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                            pDialog.show();
                             getReceiver();
                         }
                     }, 300);
@@ -222,6 +224,20 @@ public class ChooseReceiverActivity extends BaseActivity implements MyBaseAdapte
         }
 
         return result;
+    }
+
+    /**
+     * 过滤接令人，去掉状态为已完成的
+     * @param list
+     */
+    private void filterReceivers(List<Receiver> list) {
+        receiverList.clear();
+        for (Receiver receiver : list) {
+            int status = Integer.valueOf(receiver.getJltai());
+            if (status == Const.JIELING_STATUS_FRESH || status == Const.JIELING_STATUS_UNDERWAY) {
+                receiverList.add(receiver);
+            }
+        }
     }
 
     /**

@@ -189,7 +189,25 @@ public class Url {
      */
     public static final String URL_TASK_PAY_WECHAT = HOST + "/moneypenny/reward!app.action";
     /**
-     * 微信支付结果查询
+     * 账户充值—微信支付—个人
+     */
+    public static final String URL_RECHARGE_PAY_WECHAT_PER = HOST + "/mycenter/user!userApppay.action";
+    /**
+     * 账户充值—微信支付—企业
+     */
+    public static final String URL_RECHARGE_PAY_WECHAT_COM = HOST + "/mycenter/com_pany!companyApppay.action";
+
+
+    /**
+     * 赏金塞红包——微信支付结果查询
      */
     public static final String URL_TASK_PAY_WECHAT_QUERY = HOST + "/moneypenny/reward!appc.action";
+    /**
+     * 账户充值——微信支付结果查询——个人
+     */
+    public static final String URL_RECHARGE_PAY_WECHAT_QUERY_PER = HOST + "/mycenter/user!appChonguser.action";
+    /**
+     * 账户充值——微信支付结果查询——企业
+     */
+    public static final String URL_RECHARGE_PAY_WECHAT_QUERY_COM = HOST + "/mycenter/com_pany!appChongcompany.action";
 }

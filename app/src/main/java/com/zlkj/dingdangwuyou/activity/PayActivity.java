@@ -19,6 +19,7 @@ import com.zlkj.dingdangwuyou.net.MyHttpClient;
 import com.zlkj.dingdangwuyou.net.Url;
 import com.zlkj.dingdangwuyou.utils.Const;
 import com.zlkj.dingdangwuyou.utils.UserUtil;
+import com.zlkj.dingdangwuyou.wxapi.WXPayEntryActivity;
 
 import org.apache.http.Header;
 import org.json.JSONException;
@@ -39,7 +40,8 @@ public class PayActivity extends BaseActivity {
     TextView txtMoney;
 
     private final IWXAPI msgApi = WXAPIFactory.createWXAPI(this, null);
-    private String money;
+    private String money; //支付金额
+    private int payType; //支付类型
 
     @Override
     protected int getContentViewId() {
@@ -50,16 +52,21 @@ public class PayActivity extends BaseActivity {
     protected void initData() {
         txtTitle.setText("支付");
         msgApi.registerApp(Const.WECHAT_APP_ID);
-        money = getIntent().getStringExtra(Const.KEY_MONEY);
+
+        Intent intent = getIntent();
+        money = intent.getStringExtra(Const.KEY_MONEY);
+        payType = intent.getIntExtra(Const.KEY_PAY_TYPE, Const.PAY_TYPE_TASK);
+        WXPayEntryActivity.PAY_TYPE = payType;
+
         txtMoney.setText("¥" + money + " 元");
         pDialog.setCancelable(false);
         registerBroadcastReceiver();
     }
 
     /**
-     * 获取微信支付订单信息
+     * 获取微信支付订单信息——任务塞红包
      */
-    private void getWeChatOrder() {
+    private void getWeChatOrderTask() {
         RequestParams params = new RequestParams();
         params.put("body", "叮当无忧");
         params.put("total_fee", money);
@@ -78,8 +85,71 @@ public class PayActivity extends BaseActivity {
                 String jsonStr = new String(responseBody);
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
-                    boolean result = jsonObj.getBoolean("result");
-                    if (result) {
+                    String result = jsonObj.getString("result");
+                    if (result.equals("true")) {
+                        JSONObject data = jsonObj.getJSONObject("data");
+                        PayReq request = new PayReq();
+                        request.appId = data.getString("appid");
+                        request.partnerId = data.getString("partnerid");
+                        request.prepayId= data.getString("prepayid");
+                        request.packageValue = data.getString("package");
+                        request.nonceStr= data.getString("noncestr");
+                        request.timeStamp= data.getString("timestamp");
+                        request.sign= data.getString("sign");
+                        msgApi.sendReq(request);
+                    } else {
+                        Toast.makeText(context, "请求信息失败", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(context, getResources().getString(R.string.request_fail), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
+                pDialog.dismiss();
+            }
+        });
+    }
+
+    /**
+     * 获取微信支付订单信息——充值
+     */
+    private void getWeChatOrderRecharge() {
+        RequestParams params = new RequestParams();
+        params.put("body", "叮当无忧");
+        params.put("total_fee", money);
+        params.put("request", "request");
+        params.put("id", UserUtil.getUserInfo().getId());
+
+        String url = "";
+        if (UserUtil.getUserType() == Const.USER_TYPE_PER) {
+            url = Url.URL_RECHARGE_PAY_WECHAT_PER;
+        } else {
+            url = Url.URL_RECHARGE_PAY_WECHAT_COM;
+        }
+
+        MyHttpClient.getInstance().post(url, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onStart() {
+                super.onStart();
+                pDialog.setMessage("正在提交，请稍候....");
+                pDialog.show();
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String jsonStr = new String(responseBody);
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+                    String result = jsonObj.getString("result");
+                    if (result.equals("true")) {
                         JSONObject data = jsonObj.getJSONObject("data");
                         PayReq request = new PayReq();
                         request.appId = data.getString("appid");
@@ -147,7 +217,11 @@ public class PayActivity extends BaseActivity {
                 break;
             case R.id.txtConfirm: //确认支付
                 if (isWXAppInstalledAndSupported(msgApi)) {
-                    getWeChatOrder();
+                    if (payType == Const.PAY_TYPE_TASK) {
+                        getWeChatOrderTask();
+                    } else if (payType == Const.PAY_TYPE_RECHARGE) {
+                        getWeChatOrderRecharge();
+                    }
                 } else {
                     Toast.makeText(context, "您还没有安装微信", Toast.LENGTH_SHORT).show();
                 }

@@ -206,7 +206,7 @@ public class PublishedTaskActivity extends BaseActivity {
             case R.id.rdoBtnUnderway:
                 intent = new Intent(context, TaskDetailPublishedUnderwayActivity.class);
                 intent.putExtra(Const.KEY_OBJECT, underwayList.get(position));
-                startActivity(intent);
+                startActivityForResult(intent, 0);
                 break;
             case R.id.rdoBtnFinished:
                 intent = new Intent(context, TaskDetailFinishedActivity.class);
@@ -218,12 +218,12 @@ public class PublishedTaskActivity extends BaseActivity {
         }
     }
 
-    /*@Override
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Const.RESULT_CODE_APPLY_TASK_SUCCEED) {
+        if (resultCode == Const.RESULT_CODE_CONFIRM_TASK_SUCCEED) {
             pDialog.show();
             getData();
         }
-    }*/
+    }
 }
