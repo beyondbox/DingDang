@@ -201,6 +201,7 @@ public class PublishedTaskActivity extends BaseActivity {
             case R.id.rdoBtnReleased:
                 intent = new Intent(context, TaskDetailUnstartedActivity.class);
                 intent.putExtra(Const.KEY_OBJECT, releasedList.get(position));
+                intent.putExtra(Const.KEY_SHOW_CONTACT, true);
                 startActivity(intent);
                 break;
             case R.id.rdoBtnUnderway:

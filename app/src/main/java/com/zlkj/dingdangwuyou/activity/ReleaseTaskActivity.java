@@ -260,7 +260,7 @@ public class ReleaseTaskActivity extends BaseActivity {
                     public void run() {
                         release();
                     }
-                }, 200);
+                }, 500);
             }
         }
     };

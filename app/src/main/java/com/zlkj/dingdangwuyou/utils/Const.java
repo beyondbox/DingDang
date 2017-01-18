@@ -56,6 +56,7 @@ public class Const {
     public static final String KEY_QUALITY = "quality";
     public static final String KEY_MONEY = "money";
     public static final String KEY_PAY_TYPE = "payType";
+    public static final String KEY_SHOW_CONTACT = "showContact";
 
 
     public static final String ACTION_LOGIN_SUCCESS = "com.zlkj.dingdangwuyou.LOGIN_SUCCESS";

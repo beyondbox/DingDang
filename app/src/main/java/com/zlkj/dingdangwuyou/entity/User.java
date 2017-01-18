@@ -67,6 +67,7 @@ public class User {
     private String username; //帐号
     private String weight;
     private String xueli;
+    private double balance;
 
     /**
      * 企业属性
@@ -85,6 +86,7 @@ public class User {
     private String img_yyzz;
     private String industry;
     private String registadress;
+    private double cbalance;
 
 
     public String getAdress() {
@@ -271,6 +273,14 @@ public class User {
         this.xueli = xueli;
     }
 
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
     /************************************************************************************************************/
 
 
@@ -384,5 +394,13 @@ public class User {
 
     public void setRegistadress(String registadress) {
         this.registadress = registadress;
+    }
+
+    public double getCbalance() {
+        return cbalance;
+    }
+
+    public void setCbalance(double cbalance) {
+        this.cbalance = cbalance;
     }
 }

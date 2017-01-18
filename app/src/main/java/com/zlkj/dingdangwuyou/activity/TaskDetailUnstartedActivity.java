@@ -1,6 +1,7 @@
 package com.zlkj.dingdangwuyou.activity;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -59,10 +60,13 @@ public class TaskDetailUnstartedActivity extends BaseActivity {
     EditText txtMessage;
     @BindView(R.id.lLaytBottomBar)
     LinearLayout lLaytBottomBar;
+    @BindView(R.id.lLaytPhone)
+    LinearLayout lLaytPhone;
 
     private Task task;
     private ApplyTaskDialog applyDialog;
     private boolean needMenu;
+    private boolean showContact;
 
     @Override
     protected int getContentViewId() {
@@ -76,9 +80,13 @@ public class TaskDetailUnstartedActivity extends BaseActivity {
 
         task = (Task) getIntent().getSerializableExtra(Const.KEY_OBJECT);
         needMenu = getIntent().getBooleanExtra(Const.KEY_NEED_MENU, false);
+        showContact = getIntent().getBooleanExtra(Const.KEY_SHOW_CONTACT, false);
 
         if (needMenu) {
             lLaytBottomBar.setVisibility(View.VISIBLE);
+        }
+        if (showContact) {
+            lLaytPhone.setVisibility(View.VISIBLE);
         }
 
         setData();
@@ -99,6 +107,8 @@ public class TaskDetailUnstartedActivity extends BaseActivity {
         txtPacketNum.setText(task.getT_hbnum());
         txtPhone.setText(task.getT_contact());
         txtMessage.setText(task.getT_words());
+
+        txtPhone.requestFocus();
     }
 
     /**
@@ -117,7 +127,7 @@ public class TaskDetailUnstartedActivity extends BaseActivity {
         return result;
     }
 
-    @OnClick({R.id.imgViBack, R.id.txtApplyTask})
+    @OnClick({R.id.imgViBack, R.id.txtApplyTask, R.id.txtPhone})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.imgViBack: //返回
@@ -137,6 +147,12 @@ public class TaskDetailUnstartedActivity extends BaseActivity {
                         applyTask(name, sex, phone, identity, area);
                     }
                 });
+                break;
+            case R.id.txtPhone:
+                String phone = txtPhone.getText().toString().trim();
+                if (!TextUtils.isEmpty(phone)) {
+                    AppTool.dial(context, phone);
+                }
                 break;
             default:
                 break;

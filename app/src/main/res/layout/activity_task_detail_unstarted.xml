@@ -397,6 +397,7 @@
             <!--**************************************************************-->
 
             <LinearLayout
+                android:id="@+id/lLaytPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
@@ -422,6 +423,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
+                        android:editable="false"
                         android:text=""
                         android:textSize="14sp"
                         android:textColor="@color/homeTabNormal"/>

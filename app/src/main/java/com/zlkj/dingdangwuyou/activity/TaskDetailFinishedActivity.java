@@ -108,6 +108,8 @@ public class TaskDetailFinishedActivity extends BaseActivity {
             imgList.addAll(Arrays.asList(data));
             imgAdapter.notifyDataSetChanged();
         }
+
+        txtPhone.requestFocus();
     }
 
 
@@ -129,12 +131,18 @@ public class TaskDetailFinishedActivity extends BaseActivity {
 
 
 
-    @OnClick({R.id.imgViBack})
+    @OnClick({R.id.imgViBack, R.id.txtPhone})
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
             case R.id.imgViBack: //返回
                 finish();
+                break;
+            case R.id.txtPhone:
+                String phone = txtPhone.getText().toString().trim();
+                if (!TextUtils.isEmpty(phone)) {
+                    AppTool.dial(context, phone);
+                }
                 break;
             default:
                 break;

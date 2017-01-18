@@ -134,6 +134,8 @@ public class TaskDetailPublishedUnderwayActivity extends BaseActivity {
             imgList.addAll(Arrays.asList(data));
             imgAdapter.notifyDataSetChanged();
         }
+
+        txtPhone.requestFocus();
     }
 
     /**
@@ -269,7 +271,7 @@ public class TaskDetailPublishedUnderwayActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.imgViBack, R.id.txtHandle, R.id.txtReceiver})
+    @OnClick({R.id.imgViBack, R.id.txtHandle, R.id.txtReceiver, R.id.txtPhone})
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
@@ -289,6 +291,12 @@ public class TaskDetailPublishedUnderwayActivity extends BaseActivity {
                 intent.putExtra(Const.KEY_OBJECT, task);
                 startActivity(intent);
                 overridePendingTransition(R.anim.bottom_to_top, R.anim.no_change);
+                break;
+            case R.id.txtPhone:
+                String phone = txtPhone.getText().toString().trim();
+                if (!TextUtils.isEmpty(phone)) {
+                    AppTool.dial(context, phone);
+                }
                 break;
             default:
                 break;

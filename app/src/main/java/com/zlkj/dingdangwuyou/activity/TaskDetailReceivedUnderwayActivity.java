@@ -147,6 +147,8 @@ public class TaskDetailReceivedUnderwayActivity extends BaseActivity {
             imgList.addAll(Arrays.asList(data));
             imgAdapter.notifyDataSetChanged();
         }
+
+        txtPhone.requestFocus();
     }
 
 
@@ -352,7 +354,7 @@ public class TaskDetailReceivedUnderwayActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.imgViBack, R.id.txtHandle, R.id.txtReceiver})
+    @OnClick({R.id.imgViBack, R.id.txtHandle, R.id.txtReceiver, R.id.txtPhone})
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
@@ -361,6 +363,12 @@ public class TaskDetailReceivedUnderwayActivity extends BaseActivity {
                 break;
             case R.id.txtHandle: //上传图片
                 showUploadOption();
+                break;
+            case R.id.txtPhone:
+                String phone = txtPhone.getText().toString().trim();
+                if (!TextUtils.isEmpty(phone)) {
+                    AppTool.dial(context, phone);
+                }
                 break;
             default:
                 break;

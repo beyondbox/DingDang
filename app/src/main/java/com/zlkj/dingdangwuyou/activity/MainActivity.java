@@ -52,8 +52,8 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.fLaytContent)
     FrameLayout fLaytContent; //Fragment容器
 
-    private List<RelativeLayout> tabList;
-    private List<Fragment> fragList;
+    private List<RelativeLayout> tabList; //底部标签集合
+    private List<Fragment> fragList; //fragment集合
     private FragAdapter fragAdapter;
     private int currIndex = 0;
     private int lastIndex = -1;
