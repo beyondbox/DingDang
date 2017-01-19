@@ -99,7 +99,7 @@
                     android:layout_below="@id/imgViGold"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="2dp"
-                    android:text="生活帮帮"
+                    android:text="叮当帮帮"
                     android:textColor="@drawable/slt_home_tab_text_color"
                     android:textSize="13sp"/>
             </RelativeLayout>

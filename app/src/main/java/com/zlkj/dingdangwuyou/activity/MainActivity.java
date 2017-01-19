@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.rLaytHire)
     RelativeLayout rLaytHire; //招贤纳士
     @BindView(R.id.rLaytGold)
-    RelativeLayout rLaytGold; //生活帮帮
+    RelativeLayout rLaytGold; //叮当帮帮
     @BindView(R.id.rLaytMyCenter)
     RelativeLayout rLaytMyCenter; //个人中心
 

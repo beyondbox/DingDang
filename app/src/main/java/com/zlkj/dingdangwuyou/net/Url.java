@@ -8,7 +8,7 @@ package com.zlkj.dingdangwuyou.net;
 public class Url {
 
     public static final String HOST = "http://www.dingdangwuyou.com";
-    //public static final String HOST = "http://192.168.3.175:8088/dingdangwuyou";
+    //public static final String HOST = "http://192.168.3.117:8080/dingdangwuyou";
 
 
     /**
@@ -65,6 +65,8 @@ public class Url {
      * 个人-投诉
      */
     public static final String URL_USER_COMPLAIN = HOST + "/recruitmagi/user!savetousu.action";
+
+
     /**
      * 企业-招贤纳士-发布全职
      */
@@ -89,6 +91,18 @@ public class Url {
      * 企业-投诉
      */
     public static final String URL_COM_COMPLAIN = HOST + "/recruitmagi/companyrecruit!savetousu.action";
+    /**
+     * 企业-获取个人电话——查询是否已付费
+     */
+    public static final String URL_COM_CONTACT_SELECT = HOST + "/mycenter/com!find.action";
+    /**
+     * 企业-获取个人电话——付费
+     */
+    public static final String URL_COM_CONTACT_PAY = HOST + "/recruitmagi/company!oo.action";
+    /**
+     * 企业-获取个人电话——保存付费状态
+     */
+    public static final String URL_COM_CONTACT_SAVE = HOST + "/mycenter/com!save.action";
 
 
 
@@ -100,7 +114,7 @@ public class Url {
     /**
      * 赏金-查询我发布的任务
      */
-    public static final String URL_TASK_GET_PUBLISHED = HOST + "/moneypenny/reward!task.action";
+    public static final String URL_TASK_GET_PUBLISHED = HOST + "/moneypenny/reward!tasks.action";
     /**
      * 赏金-选择接令人
      */

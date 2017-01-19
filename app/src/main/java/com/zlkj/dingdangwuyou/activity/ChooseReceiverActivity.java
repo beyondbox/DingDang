@@ -194,7 +194,19 @@ public class ChooseReceiverActivity extends BaseActivity implements MyBaseAdapte
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
+                String jsonStr = new String(responseBody);
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+                    if (jsonObj.has("str")) {
+                        Toast.makeText(context, jsonObj.getString("str"), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context, "发放成功", Toast.LENGTH_SHORT).show();
+                        pDialog.show();
+                        getReceiver();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override

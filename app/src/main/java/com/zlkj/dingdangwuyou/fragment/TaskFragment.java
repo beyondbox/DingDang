@@ -45,7 +45,7 @@ import butterknife.OnClick;
 import butterknife.OnItemClick;
 
 /**
- * 生活帮帮
+ * 叮当帮帮
  * Created by Botx on 2016/10/19.
  */
 
@@ -78,7 +78,7 @@ public class TaskFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        txtTitle.setText("生活帮帮");
+        txtTitle.setText("叮当帮帮");
         txtRight.setText("发布任务");
         imgViBack.setVisibility(View.INVISIBLE);
 
