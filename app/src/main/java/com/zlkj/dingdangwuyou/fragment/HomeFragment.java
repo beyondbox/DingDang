@@ -25,13 +25,11 @@ import com.zlkj.dingdangwuyou.adapter.SocialActivityGridAdapter;
 import com.zlkj.dingdangwuyou.base.BaseFragment;
 import com.zlkj.dingdangwuyou.entity.News;
 import com.zlkj.dingdangwuyou.entity.SocialActivity;
-import com.zlkj.dingdangwuyou.entity.TaskTypeList;
 import com.zlkj.dingdangwuyou.net.MyHttpClient;
 import com.zlkj.dingdangwuyou.net.Url;
 import com.zlkj.dingdangwuyou.utils.Const;
 import com.zlkj.dingdangwuyou.utils.DisplayUtil;
 import com.zlkj.dingdangwuyou.utils.GsonUtil;
-import com.zlkj.dingdangwuyou.utils.LogHelper;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
@@ -161,6 +159,9 @@ public class HomeFragment extends BaseFragment {
                                 importantNewsList = newsList.subList(1, 2);
                                 break;
                             default:
+                                filterNewsList();
+                                totalSize = newsList.size();
+
                                 hotSpotList = newsList.subList(0, 2);
                                 importantNewsList = newsList.subList(2, totalSize);
                                 if (importantNewsList.size() > 3) {
@@ -207,6 +208,8 @@ public class HomeFragment extends BaseFragment {
                 try {
                     JSONArray jsonArr = new JSONArray(jsonStr);
                     socialList = GsonUtil.getEntityList(jsonArr.toString(), SocialActivity.class);
+                    filterSocialList();
+
                     int totalSize = socialList.size();
                     if (totalSize > 0) {
                         int columnWidth = 0; //列的宽度
@@ -260,6 +263,38 @@ public class HomeFragment extends BaseFragment {
             }
         });
     }
+
+
+    /**
+     * 社会新闻过滤
+     */
+    private void filterNewsList() {
+        for (int i = 0; i < newsList.size(); i++) {
+            News news = newsList.get(i);
+            if (news.getNewsImg().equals("/upload/44bd3b12-a309-47d4-91cc-a941fb2d61a6.jpg")) {
+                newsList.remove(i);
+                break;
+            }
+        }
+    }
+
+    /**
+     * 公益报名过滤
+     */
+    private void filterSocialList() {
+        if (socialList.size() == 0) {
+            return;
+        }
+
+        for (int i = 0; i < socialList.size(); i++) {
+            SocialActivity socialActivity = socialList.get(i);
+            if (socialActivity.getG_imgurl().equals("/upload/9b1f7344-c617-4109-846a-e11fc9b19073.jpg")) {
+                socialList.remove(i);
+                break;
+            }
+        }
+    }
+
 
     @OnItemClick({R.id.lvHotspot, R.id.lvImportantNews})
     public void onNewsItemClick(AdapterView<?> parent, View view, int position, long id) {

@@ -59,7 +59,7 @@ public class SocialActivityGridAdapter extends MyBaseAdapter<SocialActivity> {
         }
 
         Glide.with(context)
-                .load(Url.HOST + "/" + socialActivity.getG_imgurl())
+                .load(Url.HOST + socialActivity.getG_imgurl())
                 .placeholder(new ColorDrawable(context.getResources().getColor(R.color.grayLightBg)))
                 .error(new ColorDrawable(context.getResources().getColor(R.color.grayLightBg)))
                 .into(vh.imageView);

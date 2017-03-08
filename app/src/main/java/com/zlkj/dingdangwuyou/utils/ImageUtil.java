@@ -195,7 +195,7 @@ public class ImageUtil {
             }
 
         } else {
-            Toast.makeText(BaseApplication.appContext, "手机存储不可用，请检查存储状态", Toast.LENGTH_SHORT).show();
+            Toast.makeText(BaseApplication.appContext, "手机存储不可用，请检查存储状态", Toast.LENGTH_LONG).show();
             return false;
         }
     }

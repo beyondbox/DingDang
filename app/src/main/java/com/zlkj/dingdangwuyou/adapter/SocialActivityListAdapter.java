@@ -49,7 +49,7 @@ public class SocialActivityListAdapter extends MyBaseAdapter<SocialActivity> {
         vh.txtTime.setText(AppTool.dateFormat(socialActivity.getModifyDate().getTime(), "yyyy-MM-dd"));
 
         Picasso.with(context)
-                .load(Url.HOST + "/" + socialActivity.getG_imgurl())
+                .load(Url.HOST + socialActivity.getG_imgurl())
                 .resize(DisplayUtil.dip2px(context, 150), DisplayUtil.dip2px(context, 150))
                 .centerCrop()
                 .placeholder(new ColorDrawable(context.getResources().getColor(R.color.grayLightBg)))
